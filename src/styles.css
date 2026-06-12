@@ -92,6 +92,7 @@
   }
   html {
     background-color: #080808;
+    scroll-behavior: smooth;
   }
   body {
     background: var(--gradient-hero);

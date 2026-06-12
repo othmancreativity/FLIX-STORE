@@ -39,7 +39,7 @@ export function Contact() {
                 <span className="absolute inset-0 rounded-full pulse-green" />
               </span>
               <span className="font-display text-2xl tracking-wider text-white" dir="ltr">
-                +2 0{num.slice(2, 5)} {num.slice(5, 8)} {num.slice(8)}
+                +20 {num.slice(2, 5)} {num.slice(5, 8)} {num.slice(8)}
               </span>
             </motion.a>
           ))}

@@ -120,7 +120,7 @@ export function Products() {
             {/* Sub-option selector */}
             <div className="mb-6">
               <div className="text-sm text-white/60 mb-3">الحساب</div>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 min-[380px]:grid-cols-3 gap-2">
                 {SUB_OPTIONS.map((o) => (
                   <button
                     key={o.id}
@@ -206,7 +206,7 @@ export function Products() {
                     rel="noreferrer"
                     className="btn-ghost-flix !py-2.5 !text-xs"
                   >
-                    واتساب بديل · {WA_NUMBERS[1].replace("20", "0")}
+                    واتساب بديل · 010 1495 6483
                   </a>
                 </div>
               </div>

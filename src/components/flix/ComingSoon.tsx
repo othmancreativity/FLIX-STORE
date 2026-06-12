@@ -34,7 +34,7 @@ export function ComingSoon() {
 
               <div className="h-36 relative overflow-hidden">
                 <img
-                  src={u.image}
+                  src={import.meta.env.BASE_URL + u.image.slice(1)}
                   alt={u.name}
                   width={600}
                   height={350}

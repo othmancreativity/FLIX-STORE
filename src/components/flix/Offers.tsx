@@ -72,7 +72,7 @@ export function Offers() {
                     <div className={"h-44 relative overflow-hidden " + (game.image ? "bg-black" : "bg-gradient-to-br " + game.gradient)}>
                     {game.image ? (
                       <img
-                        src={game.image}
+                        src={import.meta.env.BASE_URL + game.image.slice(1)}
                         alt={game.title}
                         width="320"
                         height="176"
@@ -119,7 +119,7 @@ export function Offers() {
                         onClick={(e) => e.stopPropagation()}
                       >
                         <div className="text-xs text-white/40 tracking-widest mb-3 font-display">— اختر الحساب —</div>
-                        <div className="grid grid-cols-3 gap-2 mb-4">
+                        <div className="grid grid-cols-1 min-[380px]:grid-cols-3 gap-2 mb-4">
                           {subOpts.map((opt) => (
                             <button
                               key={opt}

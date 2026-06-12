@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/flix/Nav";
 import { Hero } from "@/components/flix/Hero";
 
+const Categories = lazy(() => import("@/components/flix/Categories").then((m) => ({ default: m.Categories })));
 const WhyUs = lazy(() => import("@/components/flix/WhyUs").then((m) => ({ default: m.WhyUs })));
 const Products = lazy(() => import("@/components/flix/Products").then((m) => ({ default: m.Products })));
 const Offers = lazy(() => import("@/components/flix/Offers").then((m) => ({ default: m.Offers })));
@@ -35,6 +36,7 @@ function Index() {
     <main className="relative">
       <Nav />
       <Hero />
+      <Suspense fallback={<SectionFallback />}><Categories /></Suspense>
       <Suspense fallback={<SectionFallback />}><WhyUs /></Suspense>
       <Suspense fallback={<SectionFallback />}><Products /></Suspense>
       <Suspense fallback={<SectionFallback />}><Offers /></Suspense>

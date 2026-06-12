@@ -12,7 +12,7 @@ const cats = [
 
 export function Categories() {
   return (
-    <section className="relative py-24 px-4 sm:px-6">
+    <section id="categories" className="relative py-24 px-4 sm:px-6">
       <div className="mx-auto max-w-7xl">
         <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
           <div>

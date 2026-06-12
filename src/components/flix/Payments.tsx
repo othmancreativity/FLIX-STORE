@@ -26,10 +26,10 @@ export function Payments() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: i * 0.05 }}
-              className="p-6 flex items-center justify-center rounded-xl"
+              className="p-6 flex items-center justify-center rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04] hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-all duration-300"
             >
               <img
-                src={m.logo}
+                src={import.meta.env.BASE_URL + m.logo.slice(1)}
                 alt={m.id}
                 width="120"
                 height="48"

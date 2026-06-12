@@ -16,9 +16,9 @@ export function Footer() {
           <a href="#how" className="hover:text-red-400 transition">كيف تطلب</a>
           <a href="#contact" className="hover:text-red-400 transition">تواصل</a>
         </div>
-        <div className="md:text-left text-sm text-white/50">
-          <div>WhatsApp: 01109664083</div>
-          <div>WhatsApp: 01014956483</div>
+        <div className="md:text-left text-sm text-white/50" dir="ltr">
+          <div>WhatsApp: 0110 966 4083</div>
+          <div>WhatsApp: 0101 495 6483</div>
         </div>
       </div>
       <div className="border-t border-white/5 py-5 text-center text-xs text-white/40">
