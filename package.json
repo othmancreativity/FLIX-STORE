@@ -4,14 +4,13 @@
   "author": "othvm",
   "sideEffects": false,
   "type": "module",
-  "scripts": {
-    "dev": "vinxi dev",
-    "build": "vinxi build",
-    "build:dev": "vinxi build --mode development",
-    "preview": "vinxi start",
-    "lint": "eslint .",
-    "format": "prettier --write ."
-  },
+"scripts": {
+  "dev": "vite dev",
+  "build": "vite build",
+  "preview": "vite preview",
+  "lint": "eslint .",
+  "format": "prettier --write ."
+},
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-accordion": "^1.2.12",
