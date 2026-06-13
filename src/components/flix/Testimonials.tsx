@@ -9,7 +9,7 @@ const reviews = [
 
 export function Testimonials() {
   return (
-    <section className="section-below-fold relative py-24 px-4 sm:px-6 bg-gradient-to-b from-black via-[#0c0606] to-black">
+    <section className="relative py-24 px-4 sm:px-6 bg-gradient-to-b from-black via-[#0c0606] to-black">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-12">
           <span className="text-red-400 text-sm tracking-[0.3em] font-display">— آراء العملاء —</span>
@@ -27,7 +27,7 @@ export function Testimonials() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: i * 0.06 }}
+              transition={{ delay: i * 0.1 }}
               className="card-flix p-7"
             >
               <div className="flex items-center gap-3 mb-4">

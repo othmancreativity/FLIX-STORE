@@ -1,163 +1,227 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { waLink, WA_NUMBERS } from "@/lib/products";
-import { MessageCircle, ChevronDown, Gamepad2 } from "lucide-react";
+import { MessageCircle, Flame, ChevronDown, X } from "lucide-react";
+import { WA_NUMBERS, waLink } from "@/lib/products";
 
-type GameId = string;
-type SubOption = "Prim5" | "Prim4" | "Sec";
-
+type Platform = "PS4" | "PS5";
 type Game = {
-  id: GameId;
-  title: string;
-  platforms: string[];
-  pricing: Partial<Record<SubOption, number>>;
-  gradient: string;
-  accent: string;
-  badge: string;
-  image: string;
+  slug: string;
+  name: string;
+  poster?: string; // optional — drop a file at src/assets/games/<slug>.jpg
+  platforms: Platform[];
+  prices: { prim5?: number; prim4?: number; sec?: number };
+  accent: string; // tailwind gradient classes for fallback card
 };
 
 const GAMES: Game[] = [
-  { id: "gta5", title: "Grand Theft Auto V", platforms: ["PS4", "PS5"], pricing: { Prim5: 500, Prim4: 350, Sec: 300 }, gradient: "from-amber-600 via-orange-700 to-red-900", accent: "text-amber-300", badge: "GTA V", image: "/images/games/gta5.webp" },
-  { id: "ea-fc26", title: "EA Sports FC 26", platforms: ["PS4", "PS5"], pricing: { Prim5: 600, Prim4: 350, Sec: 300 }, gradient: "from-blue-600 via-blue-700 to-indigo-900", accent: "text-blue-300", badge: "FC 26", image: "/images/games/ea-fc26.webp" },
-  { id: "bf6", title: "Battlefield 6", platforms: ["PS5"], pricing: { Prim5: 1350, Sec: 950 }, gradient: "from-orange-600 via-amber-700 to-yellow-900", accent: "text-orange-300", badge: "BF 6", image: "/images/games/bf6.webp" },
-  { id: "007-fl", title: "007: First Light", platforms: ["PS5"], pricing: { Prim5: 1600, Sec: 1200 }, gradient: "from-zinc-800 via-zinc-900 to-black", accent: "text-zinc-300", badge: "007", image: "/images/games/007-fl.webp" },
-  { id: "ghost-yotei", title: "Ghost of Yōtei", platforms: ["PS5"], pricing: { Prim5: 1500, Sec: 1000 }, gradient: "from-red-700 via-rose-800 to-stone-900", accent: "text-red-300", badge: "YŌTEI", image: "/images/games/ghost-yotei.webp" },
-  { id: "rdr2", title: "Red Dead Redemption II", platforms: ["PS4", "PS5"], pricing: { Prim5: 500, Prim4: 350, Sec: 300 }, gradient: "from-red-800 via-amber-900 to-yellow-950", accent: "text-red-300", badge: "RDR II", image: "/images/games/rdr2.webp" },
-  { id: "wwe-2k26", title: "WWE 2K26", platforms: ["PS5"], pricing: { Prim5: 1600, Sec: 1200 }, gradient: "from-red-600 via-rose-700 to-pink-900", accent: "text-red-300", badge: "WWE", image: "/images/games/wwe-2k26.webp" },
-  { id: "minecraft", title: "Minecraft", platforms: ["PS4", "PS5"], pricing: { Prim5: 500, Prim4: 350, Sec: 300 }, gradient: "from-emerald-600 via-green-700 to-lime-900", accent: "text-emerald-300", badge: "Minecraft", image: "/images/games/minecraft.webp" },
-  { id: "re-requiem", title: "Resident Evil: Requiem", platforms: ["PS5"], pricing: { Prim5: 1450, Sec: 1000 }, gradient: "from-red-950 via-rose-950 to-black", accent: "text-red-400", badge: "RE", image: "/images/games/re-requiem.webp" },
-  { id: "marvel-wolverine", title: "Marvel Wolverine", platforms: ["PS5"], pricing: { Prim5: 1600, Sec: 1200 }, gradient: "from-yellow-500 via-amber-600 to-blue-800", accent: "text-yellow-300", badge: "WOLVERINE", image: "/images/games/marvel-wolverine.webp" },
+  { slug: "gta5",       name: "Grand Theft Auto V",       platforms: ["PS4", "PS5"], prices: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-rose-700 via-red-900 to-black" },
+  { slug: "fc26",       name: "EA Sports FC 26",          platforms: ["PS4", "PS5"], prices: { prim5: 600, prim4: 350, sec: 300 }, accent: "from-emerald-600 via-emerald-900 to-black" },
+  { slug: "bf6",        name: "Battlefield 6",            platforms: ["PS5"],        prices: { prim5: 1350, sec: 950 },             accent: "from-orange-600 via-amber-900 to-black" },
+  { slug: "007",        name: "007: First Light",         platforms: ["PS5"],        prices: { prim5: 1600, sec: 1200 },            accent: "from-yellow-600 via-zinc-800 to-black" },
+  { slug: "yotei",      name: "Ghost of Yōtei",           platforms: ["PS5"],        prices: { prim5: 1500, sec: 1000 },            accent: "from-red-600 via-rose-900 to-black" },
+  { slug: "rdr2",       name: "Red Dead Redemption II",   platforms: ["PS4", "PS5"], prices: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-amber-700 via-orange-950 to-black" },
+  { slug: "wwe26",      name: "WWE 2K26",                 platforms: ["PS5"],        prices: { prim5: 1600, sec: 1200 },            accent: "from-red-700 via-red-950 to-black" },
+  { slug: "minecraft",  name: "Minecraft",                platforms: ["PS4", "PS5"], prices: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-lime-600 via-emerald-900 to-black" },
+  { slug: "re-requiem", name: "Resident Evil: Requiem",   platforms: ["PS5"],        prices: { prim5: 1450, sec: 1000 },            accent: "from-red-800 via-zinc-900 to-black" },
+  { slug: "wolverine",  name: "Marvel's Wolverine",       platforms: ["PS5"],        prices: { prim5: 1600, sec: 1200 },            accent: "from-yellow-600 via-amber-900 to-black" },
 ];
 
-const SUB_LABELS: Record<SubOption, string> = { Prim5: "Prim5", Prim4: "Prim4", Sec: "Sec" };
-const SUB_DESCS: Record<SubOption, string> = { Prim5: "حساب أساسي 5", Prim4: "حساب أساسي 4", Sec: "حساب ثانوي" };
+// Try to load any user-provided posters at build time. The files are optional —
+// missing slugs gracefully fall back to a stylized typographic cover.
+const posterModules = import.meta.glob("@/assets/games/*.{jpg,jpeg,png,webp}", {
+  eager: true,
+  import: "default",
+}) as Record<string, string>;
+const POSTERS: Record<string, string> = {};
+for (const [path, url] of Object.entries(posterModules)) {
+  const m = path.match(/\/([^/]+)\.(jpg|jpeg|png|webp)$/i);
+  if (m) POSTERS[m[1].toLowerCase()] = url;
+}
+
+function CoverArt({ game }: { game: Game }) {
+  const url = POSTERS[game.slug.toLowerCase()];
+  if (url) {
+    return (
+      <img
+        src={url}
+        alt={game.name}
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      />
+    );
+  }
+  // Fallback — stylized typographic cover, no fake/AI art
+  const initials = game.name
+    .replace(/[^A-Za-z0-9 ]/g, "")
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
+  return (
+    <div className={`absolute inset-0 bg-gradient-to-br ${game.accent} flex items-center justify-center`}>
+      <div className="absolute inset-0 opacity-30"
+        style={{ backgroundImage: "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 60%)" }} />
+      <div className="absolute inset-0 opacity-20"
+        style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      <span className="relative font-display text-6xl text-white/90 tracking-tighter drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">{initials}</span>
+    </div>
+  );
+}
+
+function PriceRow({ label, value }: { label: string; value?: number }) {
+  if (!value) return null;
+  return (
+    <div className="flex items-center justify-between text-xs py-1.5 border-b border-white/5 last:border-0">
+      <span className="text-white/50 tracking-wider font-display">{label}</span>
+      <span className="font-display"><span className="text-red-400">{value}</span> <span className="text-white/40 text-[10px]">EGP</span></span>
+    </div>
+  );
+}
 
 export function Offers() {
-  const [expanded, setExpanded] = useState<GameId | null>(null);
-  const [selected, setSelected] = useState<Record<GameId, SubOption>>({});
-
-  const toggleGame = (id: GameId) => {
-    setExpanded(expanded === id ? null : id);
-  };
+  const [openSlug, setOpenSlug] = useState<string | null>(null);
 
   return (
-    <section id="offers" className="section-below-fold relative py-24 px-4 sm:px-6 bg-gradient-to-b from-black via-[#0a0a0a] to-black">
-      <div className="mx-auto max-w-7xl">
-        <div className="text-center mb-14">
-          <span className="text-red-400 text-sm tracking-[0.3em] font-display">— عروض خاصة —</span>
-          <h2 className="section-heading text-chrome mt-2">عروض الصيف</h2>
-          <p className="text-white/60 mt-3">عروض الصيف — اضغط على اللعبة لعرض الأسعار والطلب</p>
+    <section id="offers" className="relative py-24 px-4 sm:px-6 border-t border-white/5">
+      <div className="absolute inset-0 -z-10 opacity-60"
+        style={{ background: "radial-gradient(ellipse at center, rgba(204,0,0,0.12), transparent 70%)" }} />
+
+      <div className="mx-auto max-w-6xl">
+        <div className="text-center mb-12">
+          <span className="inline-flex items-center gap-2 text-red-400 text-sm tracking-[0.3em] font-display">
+            <Flame className="h-4 w-4" /> — عروض حصرية —
+          </span>
+          <h2 className="section-heading text-chrome mt-2">Summer Offers · عروض الصيف</h2>
+          <p className="text-white/60 mt-3">اضغط على أي لعبة لعرض الأسعار وزر الطلب</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {GAMES.map((game) => {
-            const isOpen = expanded === game.id;
-            const subOpts = Object.keys(game.pricing) as SubOption[];
-            const activeSub = selected[game.id] ?? subOpts[0];
-            const price = game.pricing[activeSub]!;
-            const msg = `مرحباً FLIX STORE، أريد طلب: ${game.title} ${activeSub} (${price} جنيه)`;
-
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+          {GAMES.map((g, i) => {
+            const isOpen = openSlug === g.slug;
             return (
-              <div key={game.id}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.25 }}
-                  className="card-flix p-0 overflow-hidden cursor-pointer group"
-                  onClick={() => toggleGame(game.id)}
-                >
-                  {/* Cover image */}
-                    <div className={"h-44 relative overflow-hidden " + (game.image ? "bg-black" : "bg-gradient-to-br " + game.gradient)}>
-                    {game.image ? (
-                      <img
-                        src={import.meta.env.BASE_URL + game.image.slice(1)}
-                        alt={game.title}
-                        width="320"
-                        height="176"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.1),transparent_60%)]" />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute bottom-0 inset-x-0 p-4 flex items-end justify-between">
-                      <div>
-                        <div className="font-display text-[10px] tracking-[0.2em] text-white/50">{game.badge}</div>
-                        <h3 className="font-display text-base text-white leading-tight mt-0.5">{game.title}</h3>
-                      </div>
-                      <div className={`shrink-0 ${isOpen ? "rotate-180" : ""} transition-transform duration-300`}>
-                        <ChevronDown className="w-5 h-5 text-white/60" />
-                      </div>
-                    </div>
-                  </div>
+              <motion.button
+                key={g.slug}
+                type="button"
+                onClick={() => setOpenSlug(g.slug)}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: (i % 5) * 0.05 }}
+                className="group relative rounded-xl overflow-hidden border border-white/10 bg-white/[0.03] hover:border-red-500/50 transition-all hover:shadow-[0_0_24px_rgba(204,0,0,0.3)] text-right"
+                aria-expanded={isOpen}
+                aria-label={`عرض أسعار ${g.name}`}
+              >
+                <div className="relative aspect-square overflow-hidden">
+                  <CoverArt game={g} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
-                  {/* Platforms */}
-                  <div className="px-4 py-2.5 flex items-center gap-2 border-t border-white/5">
-                    <Gamepad2 className="w-3.5 h-3.5 text-white/40" />
-                    {game.platforms.map((p) => (
-                      <span key={p} className="text-[10px] font-bold tracking-wider px-2 py-0.5 rounded bg-white/10 text-white/70">{p}</span>
+                  <div className="absolute top-2 left-2 flex gap-1">
+                    {g.platforms.map((p) => (
+                      <span key={p} className="text-[9px] font-display tracking-wider px-1.5 py-0.5 rounded bg-black/70 border border-white/20 text-white/90 backdrop-blur">
+                        {p}
+                      </span>
                     ))}
                   </div>
-                </motion.div>
 
-                {/* Expanded configurator */}
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="overflow-hidden"
-                    >
-                      <div
-                        className="card-flix p-4 mt-2 border-t-2"
-                        style={{ borderTopColor: "rgba(204,0,0,0.6)" }}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <div className="text-xs text-white/40 tracking-widest mb-3 font-display">— اختر الحساب —</div>
-                        <div className="grid grid-cols-1 min-[380px]:grid-cols-3 gap-2 mb-4">
-                          {subOpts.map((opt) => (
-                            <button
-                              key={opt}
-                              onClick={() => setSelected((prev) => ({ ...prev, [game.id]: opt }))}
-                              className={`px-2 py-2.5 rounded-lg font-display text-xs transition-all border ${
-                                activeSub === opt
-                                  ? "bg-gradient-to-b from-red-500/30 to-red-700/20 border-red-500 text-white shadow-[0_0_15px_rgba(204,0,0,0.4)]"
-                                  : "bg-white/5 border-white/10 text-white/60 hover:border-white/30"
-                              }`}
-                            >
-                              {SUB_LABELS[opt]}
-                              <div className="text-[9px] mt-0.5 opacity-60 font-sans">{SUB_DESCS[opt]}</div>
-                            </button>
-                          ))}
-                        </div>
-
-                        <div className="flex items-baseline gap-2 mb-3">
-                          <span className="font-display text-3xl text-red-stroke">{price}</span>
-                          <span className="text-white/60 text-xs">EGP</span>
-                        </div>
-
-                        <a
-                          href={waLink(WA_NUMBERS[0], msg)}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="btn-flix !py-2 !px-4 !text-xs w-full"
-                        >
-                          <MessageCircle className="h-3.5 w-3.5" /> اطلب عبر WhatsApp
-                        </a>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                  <div className="absolute bottom-0 inset-x-0 p-2.5">
+                    <h3 className="font-display text-[13px] sm:text-sm text-white leading-tight drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)] line-clamp-2">
+                      {g.name}
+                    </h3>
+                    <div className="mt-1.5 inline-flex items-center gap-1 text-[10px] text-red-300/90 group-hover:text-red-300 transition">
+                      <ChevronDown className="h-3 w-3" /> اعرض الأسعار
+                    </div>
+                  </div>
+                </div>
+              </motion.button>
             );
           })}
         </div>
+
+        <p className="text-center mt-6 text-xs text-white/40">
+          الأسعار بالجنيه المصري · التسليم خلال دقائق بعد تأكيد الطلب
+        </p>
       </div>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {openSlug && (() => {
+          const g = GAMES.find((x) => x.slug === openSlug)!;
+          const msg = `مرحباً FLIX STORE، أريد ${g.name} (${g.platforms.join(" / ")})`;
+          return (
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+              onClick={() => setOpenSlug(null)}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-md rounded-2xl overflow-hidden border border-red-500/30 bg-[#0a0a0a] shadow-[0_0_60px_rgba(204,0,0,0.35)]"
+              >
+                <button
+                  onClick={() => setOpenSlug(null)}
+                  aria-label="إغلاق"
+                  className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/70 border border-white/15 flex items-center justify-center text-white/80 hover:text-white hover:border-red-500 transition"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+
+                <div className="relative aspect-square">
+                  <CoverArt game={g} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                  <div className="absolute bottom-0 inset-x-0 p-5">
+                    <div className="flex gap-1.5 mb-2">
+                      {g.platforms.map((p) => (
+                        <span key={p} className="text-[10px] font-display tracking-wider px-2 py-0.5 rounded bg-red-500/20 border border-red-500/40 text-red-200">
+                          {p}
+                        </span>
+                      ))}
+                    </div>
+                    <h3 className="font-display text-2xl text-white leading-tight">{g.name}</h3>
+                  </div>
+                </div>
+
+                <div className="p-5">
+                  <div className="text-xs tracking-[0.3em] text-white/40 mb-3">الأسعار المتاحة</div>
+                  <div className="rounded-lg bg-white/[0.03] border border-white/10 px-4">
+                    <PriceRow label="PRIM 5" value={g.prices.prim5} />
+                    <PriceRow label="PRIM 4" value={g.prices.prim4} />
+                    <PriceRow label="SEC"    value={g.prices.sec} />
+                  </div>
+
+                  <div className="mt-5 flex flex-col gap-2">
+                    <a
+                      href={waLink(WA_NUMBERS[0], msg)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn-flix !text-sm w-full justify-center"
+                    >
+                      <MessageCircle className="h-4 w-4" /> اطلب الآن عبر WhatsApp
+                    </a>
+                    <a
+                      href={waLink(WA_NUMBERS[1], msg)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn-ghost-flix !py-2 !text-xs w-full justify-center"
+                    >
+                      واتساب بديل · {WA_NUMBERS[1].replace("20", "0")}
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          );
+        })()}
+      </AnimatePresence>
     </section>
   );
 }

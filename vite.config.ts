@@ -1,8 +1,17 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tsconfigPaths from 'vite-tsconfig-paths'
+import { defineConfig } from "@tanstack/react-start/config";
+import tsConfigPaths from "vite-tsconfig-paths";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-    plugins: [react(), tsconfigPaths()],
-    base: process.env.VERCEL ? '/' : '/FLIX-STORE/',
-})
+  server: {
+    entry: "src/server.ts",
+  },
+  vite: {
+    plugins: [
+      tsConfigPaths({
+        projects: ["./tsconfig.json"],
+      }),
+      tailwindcss(),
+    ],
+  },
+});

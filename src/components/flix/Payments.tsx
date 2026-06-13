@@ -2,16 +2,16 @@ import { motion } from "framer-motion";
 import { Lock } from "lucide-react";
 
 const methods = [
-  { id: "instapay", logo: "/images/payments/instapay.png" },
-  { id: "vodafone-cash", logo: "/images/payments/vodafone-cash.svg" },
-  { id: "we-pay", logo: "/images/payments/we-pay.svg" },
-  { id: "telda", logo: "/images/payments/telda.png" },
-  { id: "klivvr", logo: "/images/payments/klivvr.svg" },
+  { name: "InstaPay", sub: "تحويل فوري" },
+  { name: "Vodafone Cash", sub: "محفظة فودافون" },
+  { name: "WE Pay", sub: "محفظة WE" },
+  { name: "Telda", sub: "كارت تيلدا" },
+  { name: "Klivvr", sub: "كليفر" },
 ];
 
 export function Payments() {
   return (
-    <section className="section-below-fold relative py-20 px-4 sm:px-6">
+    <section className="relative py-20 px-4 sm:px-6">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-10">
           <span className="text-red-400 text-sm tracking-[0.3em] font-display">— طرق الدفع —</span>
@@ -21,21 +21,15 @@ export function Payments() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
           {methods.map((m, i) => (
             <motion.div
-              key={m.id}
+              key={m.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: i * 0.05 }}
-              className="p-6 flex items-center justify-center rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 hover:bg-white/[0.04] hover:shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-all duration-300"
+              transition={{ delay: i * 0.08 }}
+              className="card-flix p-6 text-center"
             >
-              <img
-                src={import.meta.env.BASE_URL + m.logo.slice(1)}
-                alt={m.id}
-                width="120"
-                height="48"
-                className="max-w-full max-h-12 object-contain"
-                loading="lazy"
-              />
+              <div className="font-display text-xl text-white tracking-wide">{m.name}</div>
+              <div className="text-xs text-white/50 mt-1">{m.sub}</div>
             </motion.div>
           ))}
         </div>

@@ -5,7 +5,7 @@ import { Embers } from "./Embers";
 
 export function Contact() {
   return (
-    <section id="contact" className="section-below-fold relative py-28 px-4 sm:px-6 overflow-hidden">
+    <section id="contact" className="relative py-28 px-4 sm:px-6 overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(204,0,0,0.25), transparent 60%)" }} />
       </div>
@@ -31,7 +31,7 @@ export function Contact() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: i * 0.06 }}
+              transition={{ delay: i * 0.1 }}
               className="group relative flex items-center justify-center gap-3 px-6 py-5 rounded-xl bg-green-600/10 border border-green-500/40 hover:bg-green-500 hover:border-green-400 transition-all"
             >
               <span className="relative">
@@ -39,7 +39,7 @@ export function Contact() {
                 <span className="absolute inset-0 rounded-full pulse-green" />
               </span>
               <span className="font-display text-2xl tracking-wider text-white" dir="ltr">
-                +20 {num.slice(2, 5)} {num.slice(5, 8)} {num.slice(8)}
+                +2 0{num.slice(2, 5)} {num.slice(5, 8)} {num.slice(8)}
               </span>
             </motion.a>
           ))}

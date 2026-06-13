@@ -9,7 +9,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="how" className="section-below-fold relative py-24 px-4 sm:px-6 bg-[#060606]">
+    <section id="how" className="relative py-24 px-4 sm:px-6 bg-[#060606]">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-16">
           <span className="text-red-400 text-sm tracking-[0.3em] font-display">— كيف تطلب —</span>
@@ -26,7 +26,7 @@ export function HowItWorks() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.35 }}
+              transition={{ delay: i * 0.15, duration: 0.5 }}
               className="relative text-center"
             >
               <div className="relative mx-auto w-24 h-24 rounded-full bg-gradient-to-br from-red-500 to-red-900 flex items-center justify-center shadow-[0_0_40px_rgba(204,0,0,0.5)] border-4 border-black">

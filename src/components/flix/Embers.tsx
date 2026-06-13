@@ -1,32 +1,27 @@
-import { useMemo } from "react";
-
 export function Embers({ count = 30 }: { count?: number }) {
-  const particles = useMemo(() => {
-    return Array.from({ length: count }).map(() => ({
-      left: Math.random() * 100,
-      delay: Math.random() * 10,
-      duration: 8 + Math.random() * 12,
-      drift: (Math.random() - 0.5) * 200,
-      size: 2 + Math.random() * 3,
-    }));
-  }, [count]);
-
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
-      {particles.map((p, i) => (
-        <span
-          key={i}
-          className="ember"
-          style={{
-            left: `${p.left}%`,
-            animationDelay: `${p.delay}s`,
-            animationDuration: `${p.duration}s`,
-            width: `${p.size}px`,
-            height: `${p.size}px`,
-            ["--drift" as never]: `${p.drift}px`,
-          }}
-        />
-      ))}
+      {Array.from({ length: count }).map((_, i) => {
+        const left = Math.random() * 100;
+        const delay = Math.random() * 10;
+        const duration = 8 + Math.random() * 12;
+        const drift = (Math.random() - 0.5) * 200;
+        const size = 2 + Math.random() * 3;
+        return (
+          <span
+            key={i}
+            className="ember"
+            style={{
+              left: `${left}%`,
+              animationDelay: `${delay}s`,
+              animationDuration: `${duration}s`,
+              width: `${size}px`,
+              height: `${size}px`,
+              ["--drift" as never]: `${drift}px`,
+            }}
+          />
+        );
+      })}
     </div>
   );
 }

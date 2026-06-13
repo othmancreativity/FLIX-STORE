@@ -10,7 +10,7 @@ const features = [
 
 export function WhyUs() {
   return (
-    <section id="why" className="section-below-fold relative py-24 px-4 sm:px-6 bg-gradient-to-b from-black via-[#0a0a0a] to-black">
+    <section id="why" className="relative py-24 px-4 sm:px-6 bg-gradient-to-b from-black via-[#0a0a0a] to-black">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-14">
           <span className="text-red-400 text-sm tracking-[0.3em] font-display">— لماذا نحن —</span>
@@ -24,7 +24,7 @@ export function WhyUs() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.35, delay: i * 0.06 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
               className="card-flix p-6 text-center"
             >
               <div className="mx-auto w-16 h-16 rounded-2xl mb-5 flex items-center justify-center bg-gradient-to-br from-red-500 to-red-800 shadow-[0_0_30px_rgba(204,0,0,0.5)]">

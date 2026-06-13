@@ -19,7 +19,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35 }}
+            transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-red-500/40 bg-red-500/10 text-xs tracking-wider text-red-300"
           >
             <Zap className="h-3.5 w-3.5" /> تسليم فوري خلال دقائق
@@ -28,21 +28,19 @@ export function Hero() {
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
             className="font-display leading-[0.9] tracking-tight"
           >
             <span className="block text-2xl sm:text-3xl text-white/80 mb-2">متجر الترفيه الرقمي الأول</span>
-            <span className="block" dir="ltr">
-              <span className="text-[clamp(3.5rem,10vw,7rem)] text-chrome">FLIX</span>
-              <span className="text-[clamp(3rem,8vw,6rem)] text-red-stroke -mt-3">STORE</span>
-            </span>
+            <span dir="ltr" className="block text-[clamp(3.5rem,10vw,7rem)] text-chrome">FLIX</span>
+            <span dir="ltr" className="block text-[clamp(3rem,8vw,6rem)] text-red-stroke -mt-3">STORE</span>
             <span className="block w-24 h-1 mt-4 mx-auto lg:mx-0 lg:mr-0 bg-gradient-to-r from-red-500 to-transparent" />
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.45, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             className="text-white/70 text-base sm:text-lg max-w-xl mx-auto lg:mx-0"
           >
             اشتراكات PlayStation Plus بتسليم فوري وأسعار لا تقاوم — والمزيد من المنتجات قادم قريباً
@@ -51,7 +49,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: 0.35 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
             className="flex flex-wrap gap-4 justify-center lg:justify-start"
           >
             <a href="#products" className="btn-flix">تسوق الآن</a>
@@ -59,7 +57,7 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
             className="flex gap-8 pt-6 justify-center lg:justify-start text-sm text-white/60"
           >
             <div><div className="font-display text-3xl text-white">5K+</div>عميل سعيد</div>
@@ -74,8 +72,8 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
           animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="relative aspect-square max-w-lg mx-auto hidden lg:flex items-center justify-center"
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="relative aspect-square max-w-lg mx-auto hidden lg:flex items-center justify-center"
         >
           <div className="absolute inset-0 rounded-full blur-3xl opacity-70"
             style={{ background: "radial-gradient(circle, rgba(255,26,26,0.5), transparent 70%)" }} />

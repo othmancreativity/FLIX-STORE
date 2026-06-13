@@ -12,7 +12,7 @@ const cats = [
 
 export function Categories() {
   return (
-    <section id="categories" className="relative py-24 px-4 sm:px-6">
+    <section className="relative py-24 px-4 sm:px-6">
       <div className="mx-auto max-w-7xl">
         <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
           <div>
@@ -29,7 +29,7 @@ export function Categories() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.35, delay: i * 0.05 }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
               className="card-flix p-7 group"
             >
               <div className="flex items-start justify-between mb-6">
