@@ -9,17 +9,19 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
-import { SpeedInsights } from '@vercel/speed-insights/react'
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { Analytics } from '@vercel/analytics/react'
+import { Analytics } from "@vercel/analytics/react";
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">
+          Page not found
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
@@ -50,7 +52,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           This page didn't load
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Something went wrong on our end. You can try refreshing or head back
+          home.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -74,34 +77,69 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "FLIX STORE | متجر الاشتراكات الرقمية في مصر" },
-      { name: "description", content: "اشتراكات Netflix, PlayStation Plus, Spotify, Disney+ وأكثر — تسليم فوري | دفع آمن | دعم 24/7" },
-      { property: "og:title", content: "FLIX STORE | متجر الاشتراكات الرقمية في مصر" },
-      { property: "og:description", content: "اشتراكات Netflix, PlayStation Plus, Spotify, Disney+ وأكثر — تسليم فوري | دفع آمن | دعم 24/7" },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "FLIX STORE | متجر الاشتراكات الرقمية في مصر" },
-      { name: "twitter:description", content: "اشتراكات Netflix, PlayStation Plus, Spotify, Disney+ وأكثر — تسليم فوري | دفع آمن | دعم 24/7" },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/213f2cc4-d170-48e0-b119-1099fa545a84/id-preview-df513aa9--c0baba81-033c-496d-bf30-2556cdb5b964.lovable.app-1781217264246.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/213f2cc4-d170-48e0-b119-1099fa545a84/id-preview-df513aa9--c0baba81-033c-496d-bf30-2556cdb5b964.lovable.app-1781217264246.png" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Tajawal:wght@400;500;700;900&display=swap" },
-    ],
-  }),
-  shellComponent: RootShell,
-  component: RootComponent,
-  notFoundComponent: NotFoundComponent,
-  errorComponent: ErrorComponent,
-});
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
+  {
+    head: () => ({
+      meta: [
+        { charSet: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { title: "FLIX STORE | متجر الاشتراكات الرقمية في مصر" },
+        {
+          name: "description",
+          content:
+            "اشتراكات Netflix, PlayStation Plus, Spotify, Disney+ وأكثر — تسليم فوري | دفع آمن | دعم 24/7",
+        },
+        {
+          property: "og:title",
+          content: "FLIX STORE | متجر الاشتراكات الرقمية في مصر",
+        },
+        {
+          property: "og:description",
+          content:
+            "اشتراكات Netflix, PlayStation Plus, Spotify, Disney+ وأكثر — تسليم فوري | دفع آمن | دعم 24/7",
+        },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
+        {
+          name: "twitter:title",
+          content: "FLIX STORE | متجر الاشتراكات الرقمية في مصر",
+        },
+        {
+          name: "twitter:description",
+          content:
+            "اشتراكات Netflix, PlayStation Plus, Spotify, Disney+ وأكثر — تسليم فوري | دفع آمن | دعم 24/7",
+        },
+        {
+          property: "og:image",
+          content:
+            "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/213f2cc4-d170-48e0-b119-1099fa545a84/id-preview-df513aa9--c0baba81-033c-496d-bf30-2556cdb5b964.lovable.app-1781217264246.png",
+        },
+        {
+          name: "twitter:image",
+          content:
+            "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/213f2cc4-d170-48e0-b119-1099fa545a84/id-preview-df513aa9--c0baba81-033c-496d-bf30-2556cdb5b964.lovable.app-1781217264246.png",
+        },
+      ],
+      links: [
+        { rel: "stylesheet", href: appCss },
+        { rel: "preconnect", href: "https://fonts.googleapis.com" },
+        {
+          rel: "preconnect",
+          href: "https://fonts.gstatic.com",
+          crossOrigin: "anonymous",
+        },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Tajawal:wght@400;500;700;900&display=swap",
+        },
+      ],
+    }),
+    shellComponent: RootShell,
+    component: RootComponent,
+    notFoundComponent: NotFoundComponent,
+    errorComponent: ErrorComponent,
+  },
+);
 
 function RootShell({ children }: { children: ReactNode }) {
   return (

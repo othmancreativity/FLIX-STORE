@@ -14,16 +14,76 @@ type Game = {
 };
 
 const GAMES: Game[] = [
-  { slug: "gta5",       name: "Grand Theft Auto V",       platforms: ["PS4", "PS5"], prices: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-rose-700 via-red-900 to-black" },
-  { slug: "fc26",       name: "EA Sports FC 26",          platforms: ["PS4", "PS5"], prices: { prim5: 600, prim4: 350, sec: 300 }, accent: "from-emerald-600 via-emerald-900 to-black" },
-  { slug: "bf6",        name: "Battlefield 6",            platforms: ["PS5"],        prices: { prim5: 1350, sec: 950 },             accent: "from-orange-600 via-amber-900 to-black" },
-  { slug: "007",        name: "007: First Light",         platforms: ["PS5"],        prices: { prim5: 1600, sec: 1200 },            accent: "from-yellow-600 via-zinc-800 to-black" },
-  { slug: "yotei",      name: "Ghost of Yōtei",           platforms: ["PS5"],        prices: { prim5: 1500, sec: 1000 },            accent: "from-red-600 via-rose-900 to-black" },
-  { slug: "rdr2",       name: "Red Dead Redemption II",   platforms: ["PS4", "PS5"], prices: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-amber-700 via-orange-950 to-black" },
-  { slug: "wwe26",      name: "WWE 2K26",                 platforms: ["PS5"],        prices: { prim5: 1600, sec: 1200 },            accent: "from-red-700 via-red-950 to-black" },
-  { slug: "minecraft",  name: "Minecraft",                platforms: ["PS4", "PS5"], prices: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-lime-600 via-emerald-900 to-black" },
-  { slug: "re-requiem", name: "Resident Evil: Requiem",   platforms: ["PS5"],        prices: { prim5: 1450, sec: 1000 },            accent: "from-red-800 via-zinc-900 to-black" },
-  { slug: "wolverine",  name: "Marvel's Wolverine",       platforms: ["PS5"],        prices: { prim5: 1600, sec: 1200 },            accent: "from-yellow-600 via-amber-900 to-black" },
+  {
+    slug: "gta5",
+    name: "Grand Theft Auto V",
+    platforms: ["PS4", "PS5"],
+    prices: { prim5: 500, prim4: 350, sec: 300 },
+    accent: "from-rose-700 via-red-900 to-black",
+  },
+  {
+    slug: "fc26",
+    name: "EA Sports FC 26",
+    platforms: ["PS4", "PS5"],
+    prices: { prim5: 600, prim4: 350, sec: 300 },
+    accent: "from-emerald-600 via-emerald-900 to-black",
+  },
+  {
+    slug: "bf6",
+    name: "Battlefield 6",
+    platforms: ["PS5"],
+    prices: { prim5: 1350, sec: 950 },
+    accent: "from-orange-600 via-amber-900 to-black",
+  },
+  {
+    slug: "007",
+    name: "007: First Light",
+    platforms: ["PS5"],
+    prices: { prim5: 1600, sec: 1200 },
+    accent: "from-yellow-600 via-zinc-800 to-black",
+  },
+  {
+    slug: "yotei",
+    name: "Ghost of Yōtei",
+    platforms: ["PS5"],
+    prices: { prim5: 1500, sec: 1000 },
+    accent: "from-red-600 via-rose-900 to-black",
+  },
+  {
+    slug: "rdr2",
+    name: "Red Dead Redemption II",
+    platforms: ["PS4", "PS5"],
+    prices: { prim5: 500, prim4: 350, sec: 300 },
+    accent: "from-amber-700 via-orange-950 to-black",
+  },
+  {
+    slug: "wwe26",
+    name: "WWE 2K26",
+    platforms: ["PS5"],
+    prices: { prim5: 1600, sec: 1200 },
+    accent: "from-red-700 via-red-950 to-black",
+  },
+  {
+    slug: "minecraft",
+    name: "Minecraft",
+    platforms: ["PS4", "PS5"],
+    prices: { prim5: 500, prim4: 350, sec: 300 },
+    accent: "from-lime-600 via-emerald-900 to-black",
+  },
+  {
+    slug: "re-requiem",
+    name: "Resident Evil: Requiem",
+    platforms: ["PS5"],
+    prices: { prim5: 1450, sec: 1000 },
+    accent: "from-red-800 via-zinc-900 to-black",
+  },
+  {
+    slug: "wolverine",
+    name: "Marvel's Wolverine",
+    platforms: ["PS5"],
+    prices: { prim5: 1600, sec: 1200 },
+    accent: "from-yellow-600 via-amber-900 to-black",
+  },
 ];
 
 // Try to load any user-provided posters at build time. The files are optional —
@@ -60,23 +120,51 @@ function CoverArt({ game }: { game: Game }) {
     .join("")
     .toUpperCase();
   return (
-    <div className={`absolute inset-0 bg-gradient-to-br ${game.accent} flex items-center justify-center`}>
-      <div className="absolute inset-0 opacity-30"
-        style={{ backgroundImage: "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 60%)" }} />
-      <div className="absolute inset-0 opacity-20"
-        style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-      <span className="relative font-display text-6xl text-white/90 tracking-tighter drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">{initials}</span>
+    <div
+      className={`absolute inset-0 bg-gradient-to-br ${game.accent} flex items-center justify-center`}
+    >
+      <div
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 60%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+      />
+      <span className="relative font-display text-6xl text-white/90 tracking-tighter drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+        {initials}
+      </span>
     </div>
   );
 }
 
-function PriceBuyRow({ label, value, onBuy }: { label: string; value?: number; onBuy: (account: string, price: number) => void }) {
+function PriceBuyRow({
+  label,
+  value,
+  onBuy,
+}: {
+  label: string;
+  value?: number;
+  onBuy: (account: string, price: number) => void;
+}) {
   if (!value) return null;
   return (
     <div className="flex items-center justify-between gap-3 py-2.5 border-b border-white/5 last:border-0">
-      <span className="text-xs text-white/60 tracking-wider font-display">{label}</span>
+      <span className="text-xs text-white/60 tracking-wider font-display">
+        {label}
+      </span>
       <div className="flex items-center gap-2">
-        <span className="font-display text-sm"><span className="text-red-400">{value}</span> <span className="text-white/40 text-[10px]">جنيه</span></span>
+        <span className="font-display text-sm">
+          <span className="text-red-400">{value}</span>{" "}
+          <span className="text-white/40 text-[10px]">جنيه</span>
+        </span>
         <button
           type="button"
           onClick={() => onBuy(label, value)}
@@ -99,24 +187,37 @@ export function Offers() {
       type: g.name,
       duration: null,
       account,
-      platform: g.platforms.length === 1 ? g.platforms[0] : g.platforms.join(" / "),
+      platform:
+        g.platforms.length === 1 ? g.platforms[0] : g.platforms.join(" / "),
       price,
     });
     setOpenSlug(null);
   };
 
   return (
-    <section id="offers" className="relative py-24 px-4 sm:px-6 border-t border-white/5">
-      <div className="absolute inset-0 -z-10 opacity-60"
-        style={{ background: "radial-gradient(ellipse at center, rgba(204,0,0,0.12), transparent 70%)" }} />
+    <section
+      id="offers"
+      className="relative py-24 px-4 sm:px-6 border-t border-white/5"
+    >
+      <div
+        className="absolute inset-0 -z-10 opacity-60"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(204,0,0,0.12), transparent 70%)",
+        }}
+      />
 
       <div className="mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-2 text-red-400 text-sm tracking-[0.3em] font-display">
             <Flame className="h-4 w-4" /> — عروض حصرية —
           </span>
-          <h2 className="section-heading text-chrome mt-2">Summer Offers · عروض الصيف</h2>
-          <p className="text-white/60 mt-3">اضغط على أي لعبة لعرض الأسعار وزر الطلب</p>
+          <h2 className="section-heading text-chrome mt-2">
+            Summer Offers · عروض الصيف
+          </h2>
+          <p className="text-white/60 mt-3">
+            اضغط على أي لعبة لعرض الأسعار وزر الطلب
+          </p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
@@ -141,7 +242,10 @@ export function Offers() {
 
                   <div className="absolute top-2 left-2 flex gap-1">
                     {g.platforms.map((p) => (
-                      <span key={p} className="text-[9px] font-display tracking-wider px-1.5 py-0.5 rounded bg-black/70 border border-white/20 text-white/90 backdrop-blur">
+                      <span
+                        key={p}
+                        className="text-[9px] font-display tracking-wider px-1.5 py-0.5 rounded bg-black/70 border border-white/20 text-white/90 backdrop-blur"
+                      >
                         {p}
                       </span>
                     ))}
@@ -168,70 +272,93 @@ export function Offers() {
 
       {/* Price modal */}
       <AnimatePresence>
-        {openSlug && (() => {
-          const g = GAMES.find((x) => x.slug === openSlug)!;
-          return (
-            <motion.div
-              key="backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-              onClick={() => setOpenSlug(null)}
-              dir="rtl"
-            >
+        {openSlug &&
+          (() => {
+            const g = GAMES.find((x) => x.slug === openSlug)!;
+            return (
               <motion.div
-                initial={{ opacity: 0, scale: 0.92, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
-                onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-md rounded-2xl overflow-hidden border border-red-500/30 bg-[#0a0a0a] shadow-[0_0_60px_rgba(204,0,0,0.35)]"
+                key="backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+                onClick={() => setOpenSlug(null)}
+                dir="rtl"
               >
-                <button
-                  onClick={() => setOpenSlug(null)}
-                  aria-label="إغلاق"
-                  className="absolute top-3 left-3 z-10 w-9 h-9 rounded-full bg-black/70 border border-white/15 flex items-center justify-center text-white/80 hover:text-white hover:border-red-500 transition"
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                  transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative w-full max-w-md rounded-2xl overflow-hidden border border-red-500/30 bg-[#0a0a0a] shadow-[0_0_60px_rgba(204,0,0,0.35)]"
                 >
-                  <X className="h-4 w-4" />
-                </button>
+                  <button
+                    onClick={() => setOpenSlug(null)}
+                    aria-label="إغلاق"
+                    className="absolute top-3 left-3 z-10 w-9 h-9 rounded-full bg-black/70 border border-white/15 flex items-center justify-center text-white/80 hover:text-white hover:border-red-500 transition"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
 
-                <div className="relative aspect-square">
-                  <CoverArt game={g} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                  <div className="absolute bottom-0 inset-x-0 p-5">
-                    <div className="flex gap-1.5 mb-2">
-                      {g.platforms.map((p) => (
-                        <span key={p} className="text-[10px] font-display tracking-wider px-2 py-0.5 rounded bg-red-500/20 border border-red-500/40 text-red-200">
-                          {p}
-                        </span>
-                      ))}
+                  <div className="relative aspect-square">
+                    <CoverArt game={g} />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                    <div className="absolute bottom-0 inset-x-0 p-5">
+                      <div className="flex gap-1.5 mb-2">
+                        {g.platforms.map((p) => (
+                          <span
+                            key={p}
+                            className="text-[10px] font-display tracking-wider px-2 py-0.5 rounded bg-red-500/20 border border-red-500/40 text-red-200"
+                          >
+                            {p}
+                          </span>
+                        ))}
+                      </div>
+                      <h3 className="font-display text-2xl text-white leading-tight">
+                        {g.name}
+                      </h3>
                     </div>
-                    <h3 className="font-display text-2xl text-white leading-tight">{g.name}</h3>
                   </div>
-                </div>
 
-                <div className="p-5">
-                  <div className="flex items-center gap-2 text-xs tracking-[0.3em] text-white/40 mb-3">
-                    <Gamepad2 className="h-3.5 w-3.5 text-red-400" /> اختر نوع الحساب والسعر
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 text-xs tracking-[0.3em] text-white/40 mb-3">
+                      <Gamepad2 className="h-3.5 w-3.5 text-red-400" /> اختر نوع
+                      الحساب والسعر
+                    </div>
+                    <div className="rounded-lg bg-white/[0.03] border border-white/10 px-4">
+                      <PriceBuyRow
+                        label="PRIM 5"
+                        value={g.prices.prim5}
+                        onBuy={(a, p) => startBuy(g, a, p)}
+                      />
+                      <PriceBuyRow
+                        label="PRIM 4"
+                        value={g.prices.prim4}
+                        onBuy={(a, p) => startBuy(g, a, p)}
+                      />
+                      <PriceBuyRow
+                        label="SEC"
+                        value={g.prices.sec}
+                        onBuy={(a, p) => startBuy(g, a, p)}
+                      />
+                    </div>
+                    <p className="text-[11px] text-white/40 text-center mt-3">
+                      اضغط على أي سعر لبدء عملية الدفع
+                    </p>
                   </div>
-                  <div className="rounded-lg bg-white/[0.03] border border-white/10 px-4">
-                    <PriceBuyRow label="PRIM 5" value={g.prices.prim5} onBuy={(a, p) => startBuy(g, a, p)} />
-                    <PriceBuyRow label="PRIM 4" value={g.prices.prim4} onBuy={(a, p) => startBuy(g, a, p)} />
-                    <PriceBuyRow label="SEC"    value={g.prices.sec}   onBuy={(a, p) => startBuy(g, a, p)} />
-                  </div>
-                  <p className="text-[11px] text-white/40 text-center mt-3">
-                    اضغط على أي سعر لبدء عملية الدفع
-                  </p>
-                </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          );
-        })()}
+            );
+          })()}
       </AnimatePresence>
 
-      <PurchaseFlow open={!!order} onClose={() => setOrder(null)} order={order} />
+      <PurchaseFlow
+        open={!!order}
+        onClose={() => setOrder(null)}
+        order={order}
+      />
     </section>
   );
 }
