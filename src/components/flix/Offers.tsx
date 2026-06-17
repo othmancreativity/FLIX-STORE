@@ -88,7 +88,7 @@ const GAMES: Game[] = [
 
 // Try to load any user-provided posters at build time. The files are optional —
 // missing slugs gracefully fall back to a stylized typographic cover.
-const posterModules = import.meta.glob("@/assets/games/*.{jpg,jpeg,png,webp}", {
+const posterModules = import.meta.glob("../../assets/games/*.{jpg,jpeg,png,webp}", {
   eager: true,
   import: "default",
 }) as Record<string, string>;
