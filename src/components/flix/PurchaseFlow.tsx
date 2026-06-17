@@ -174,7 +174,6 @@ export function PurchaseFlow({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           className="fixed inset-0 z-[80] bg-black/85 flex items-start sm:items-center justify-center p-3 sm:p-6 overflow-y-auto"
-          onClick={onClose}
           dir="rtl"
         >
           <motion.div
@@ -571,4 +570,5 @@ export function PurchaseFlow({
     </AnimatePresence>
   );
 }
+
 
