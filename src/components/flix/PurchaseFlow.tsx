@@ -173,7 +173,7 @@ export function PurchaseFlow({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
-          className="fixed inset-0 z-[80] bg-black/85 backdrop-blur-sm flex items-start sm:items-center justify-center p-3 sm:p-6 overflow-y-auto"
+          className="fixed inset-0 z-[80] bg-black/85 flex items-start sm:items-center justify-center p-3 sm:p-6 overflow-y-auto"
           onClick={onClose}
           dir="rtl"
         >
@@ -449,7 +449,10 @@ export function PurchaseFlow({
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="اسمك (عشان نعرف مين إنت)"
-                        className="w-full px-3 py-2.5 rounded-lg bg-black/50 border border-white/15 focus:border-red-500 focus:outline-none text-white placeholder:text-white/30"
+                  autoComplete="name"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  className="w-full px-3 py-2.5 rounded-lg bg-black/50 border border-white/15 focus:border-red-500 focus:outline-none text-white placeholder:text-white/30"
                       />
                     </div>
                     <div>
@@ -462,8 +465,8 @@ export function PurchaseFlow({
                           setWa(e.target.value.replace(/[^\d+]/g, ""))
                         }
                         inputMode="tel"
-                        dir="ltr"
-                        placeholder="رقم واتساب التواصل معك"
+                  autoComplete="tel"
+                  placeholder="رقم واتساب التواصل معك"
                         className="w-full px-3 py-2.5 rounded-lg bg-black/50 border border-white/15 focus:border-red-500 focus:outline-none text-white placeholder:text-white/30 text-right"
                       />
                     </div>
@@ -568,3 +571,4 @@ export function PurchaseFlow({
     </AnimatePresence>
   );
 }
+
