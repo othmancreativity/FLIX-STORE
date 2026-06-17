@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { ShoppingBag, MessageCircle, Zap } from "lucide-react";
+import { ShoppingBag, Wallet, Zap } from "lucide-react";
 
 const steps = [
-  { icon: ShoppingBag, title: "اختر منتجك", desc: "تصفح كتالوجنا واختر الاشتراك أو الباقة المناسبة" },
-  { icon: MessageCircle, title: "تواصل على واتساب", desc: "ابعتلنا اسم المنتج، هنرد عليك فوراً بالخطوات" },
-  { icon: Zap, title: "استقبل اشتراكك", desc: "خلال دقائق قليلة فقط، يصلك المنتج جاهز للاستخدام" },
+  { icon: ShoppingBag, title: "اختر منتجك ومدته", desc: "تصفح المنتجات واختر النوع والمدة المناسبة" },
+  { icon: Wallet, title: "ادفع بطريقتك المفضلة", desc: "حول المبلغ على أحد طرق الدفع المتاحة وارفع إيصال التحويل" },
+  { icon: Zap, title: "استقبل اشتراكك فوراً", desc: "بعد تأكيد الدفع، يوصلك المنتج خلال دقائق قليلة" },
 ];
 
 export function HowItWorks() {

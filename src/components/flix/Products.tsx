@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { waLink, WA_NUMBERS } from "@/lib/products";
-import { Check, MessageCircle, Sparkles, Gamepad2 } from "lucide-react";
+import { Check, Sparkles, Gamepad2, AlertTriangle } from "lucide-react";
+import { PurchaseFlow, type PurchaseOrder } from "./PurchaseFlow";
 
 type Tier = "Essential" | "Extra";
 type Duration = "شهر" | "3 شهور" | "سنة";
@@ -52,10 +52,17 @@ export function Products() {
   const [tier, setTier] = useState<Tier>("Extra");
   const [dur, setDur] = useState<Duration>("شهر");
   const [acc, setAcc] = useState<AccountType>("Prim5");
+  const [flowOpen, setFlowOpen] = useState(false);
 
   const price = useMemo(() => PRICES[tier][dur][acc], [tier, dur, acc]);
   const accLabel = ACCOUNTS.find((a) => a.id === acc)!.label;
-  const msg = `مرحباً FLIX STORE، أريد طلب: PlayStation Plus ${tier} - ${dur} - ${accLabel} (${price} جنيه)`;
+  const order: PurchaseOrder = {
+    product: `PlayStation Plus ${tier}`,
+    type: tier,
+    duration: dur,
+    account: accLabel,
+    price,
+  };
 
   const tierAccent = tier === "Essential"
     ? { ring: "border-sky-500", glow: "shadow-[0_0_22px_rgba(56,189,248,0.4)]", fill: "from-sky-500/30 to-sky-700/20", text: "text-sky-300", chip: "bg-sky-500" }
@@ -198,27 +205,28 @@ export function Products() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <a
-                  href={waLink(WA_NUMBERS[0], msg)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-flix !text-base"
+                <button
+                  type="button"
+                  onClick={() => setFlowOpen(true)}
+                  className="btn-flix !text-base w-full font-bold pulse-red"
+                  style={{ fontFamily: 'Cairo, Tajawal, sans-serif' }}
                 >
-                  <MessageCircle className="h-5 w-5" /> اطلب الآن عبر WhatsApp
-                </a>
-                <a
-                  href={waLink(WA_NUMBERS[1], msg)}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-ghost-flix !py-2.5 !text-xs"
-                >
-                  واتساب بديل · {WA_NUMBERS[1].replace("20", "0")}
-                </a>
+                  احصل عليه الآن 🎮
+                </button>
+                <p className="text-[11px] text-red-300/80 text-center mt-1">
+                  ممنوع استرجاع الفلوس بعد التحويل — إلا في حالة خطأ من جانبنا أو تأخير ❌
+                </p>
+                <div className="flex items-start gap-2 text-[11px] text-white/50 mt-1">
+                  <AlertTriangle className="h-3.5 w-3.5 text-red-400 shrink-0 mt-0.5" />
+                  <span>الطلبات: 01109664083 · الدفع: 01014956483</span>
+                </div>
               </div>
             </div>
           </div>
         </motion.div>
       </div>
+
+      <PurchaseFlow open={flowOpen} onClose={() => setFlowOpen(false)} order={order} />
     </section>
   );
 }

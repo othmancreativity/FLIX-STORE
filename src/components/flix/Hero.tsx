@@ -52,7 +52,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="flex flex-wrap gap-4 justify-center lg:justify-start"
           >
-            <a href="#products" className="btn-flix">تسوق الآن</a>
+            <a href="#products" className="btn-flix pulse-red" style={{ fontFamily: 'Cairo, Tajawal, sans-serif' }}>احصل عليه الآن 🎮</a>
             <a href="#contact" className="btn-ghost-flix">تواصل معنا</a>
           </motion.div>
 
@@ -95,16 +95,22 @@ export function Hero() {
       {/* Brand marquee */}
       <div className="absolute bottom-0 inset-x-0 border-t border-white/5 bg-black/40 py-4">
         <div className="marquee">
-          <div className="marquee-track font-display tracking-[0.3em] text-sm text-white/40">
-            {["NETFLIX", "PLAYSTATION", "SPOTIFY", "DISNEY+", "XBOX", "YOUTUBE PREMIUM", "SHAHID VIP", "APPLE ONE", "PUBG MOBILE", "FREE FIRE"].map(s => (
-              <span key={s} className="flex items-center gap-16">{s}<span className="text-red-500">◆</span></span>
-            ))}
-          </div>
-          <div className="marquee-track font-display tracking-[0.3em] text-sm text-white/40" aria-hidden>
-            {["NETFLIX", "PLAYSTATION", "SPOTIFY", "DISNEY+", "XBOX", "YOUTUBE PREMIUM", "SHAHID VIP", "APPLE ONE", "PUBG MOBILE", "FREE FIRE"].map(s => (
-              <span key={s} className="flex items-center gap-16">{s}<span className="text-red-500">◆</span></span>
-            ))}
-          </div>
+          {[0,1].map(k => (
+            <div key={k} className="marquee-track font-display tracking-[0.3em] text-sm text-white/50" aria-hidden={k===1}>
+              {[
+                "⚡ بلايستيشن بلس",
+                "🎮 Essential · Extra",
+                "✅ منتج أصلي مضمون",
+                "🔒 دفع آمن",
+                "⚡ تسليم فوري",
+                "💬 دعم واتساب",
+                "🎮 PRIM 5 · PRIM 4 · SEC",
+                "⭐ جودة مضمونة",
+              ].map(s => (
+                <span key={s} className="flex items-center gap-12">{s}<span className="text-red-500">◆</span></span>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>

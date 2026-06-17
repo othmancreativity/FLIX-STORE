@@ -4,9 +4,7 @@ import { Lock } from "lucide-react";
 const methods = [
   { name: "InstaPay", sub: "تحويل فوري" },
   { name: "Vodafone Cash", sub: "محفظة فودافون" },
-  { name: "WE Pay", sub: "محفظة WE" },
   { name: "Telda", sub: "كارت تيلدا" },
-  { name: "Klivvr", sub: "كليفر" },
 ];
 
 export function Payments() {
@@ -18,7 +16,7 @@ export function Payments() {
           <h2 className="section-heading text-chrome mt-2">ادفع بسهولة</h2>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
           {methods.map((m, i) => (
             <motion.div
               key={m.name}

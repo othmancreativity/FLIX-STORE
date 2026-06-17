@@ -16,10 +16,13 @@ export function Footer() {
           <a href="#how" className="hover:text-red-400 transition">كيف تطلب</a>
           <a href="#contact" className="hover:text-red-400 transition">تواصل</a>
         </div>
-        <div className="md:text-left text-sm text-white/50">
-          <div>WhatsApp: 01109664083</div>
-          <div>WhatsApp: 01014956483</div>
+        <div className="md:text-left text-sm text-white/60 space-y-1">
+          <div><span className="text-white/40">للطلبات والتواصل:</span> <span dir="ltr">01109664083</span></div>
+          <div><span className="text-white/40">للدفع فقط:</span> <span dir="ltr">01014956483</span></div>
         </div>
+      </div>
+      <div className="border-t border-white/10 py-4 text-center text-xs text-red-400/90 px-4">
+        ⚠️ ممنوع استرجاع الفلوس بعد التحويل لأي سبب — إلا في حالة خطأ من جانبنا أو تأخير ❌
       </div>
       <div className="border-t border-white/5 py-5 text-center text-xs text-white/40">
         © 2025 FLIX STORE — جميع الحقوق محفوظة

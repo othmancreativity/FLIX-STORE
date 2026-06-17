@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 
 const reviews = [
-  { name: "أحمد م.", initial: "أ", color: "from-red-500 to-red-800", text: "جربت Netflix مشتركة وجاتلي خلال 3 دقائق بالظبط، خدمة ممتازة وسعر كويس جداً!" },
-  { name: "سارة أ.", initial: "س", color: "from-purple-500 to-pink-700", text: "اشتريت PS Plus Extra وفعلاً وفرت فلوس كتير، والتواصل على واتساب كان سريع جداً" },
-  { name: "كريم ف.", initial: "ك", color: "from-blue-500 to-indigo-800", text: "من أحسن المتاجر الرقمية في مصر، بيتعامل بأمانة وبيسلم بسرعة. أنصح بيهم بشدة" },
+  { name: "أحمد م.", initial: "أ", color: "from-red-500 to-red-800", text: "اشتريت PS Plus Extra PRIM 5 وجالي خلال 4 دقائق بالظبط، سعر ممتاز وتسليم سريع جداً، هينصح بيهم" },
+  { name: "سارة أ.", initial: "س", color: "from-purple-500 to-pink-700", text: "عملت اشتراك Essential SEC واتبعتلي البيانات فوراً، خدمة محترمة وأسعار أحسن من أي متجر تاني" },
+  { name: "كريم ف.", initial: "ك", color: "from-blue-500 to-indigo-800", text: "من أفضل المتاجر في مصر لاشتراكات البلايستيشن، أصلية 100% وبيسلموا بسرعة مش طبيعية" },
 ];
 
 export function Testimonials() {

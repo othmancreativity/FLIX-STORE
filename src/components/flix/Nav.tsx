@@ -16,7 +16,7 @@ export function Nav() {
           <a href="#how" className="hover:text-white transition">كيف تطلب</a>
           <a href="#contact" className="hover:text-white transition">تواصل</a>
         </nav>
-        <a href="#products" className="btn-flix !py-2 !px-4 !text-xs">اطلب الآن</a>
+        <a href="#products" className="btn-flix !py-2 !px-4 !text-xs">احصل عليه 🎮</a>
       </div>
     </header>
   );

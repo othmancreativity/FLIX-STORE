@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageCircle, Flame, ChevronDown, X } from "lucide-react";
-import { WA_NUMBERS, waLink } from "@/lib/products";
+import { Flame, ChevronDown, X, Gamepad2 } from "lucide-react";
+import { PurchaseFlow, type PurchaseOrder } from "./PurchaseFlow";
 
 type Platform = "PS4" | "PS5";
 type Game = {
   slug: string;
   name: string;
-  poster?: string; // optional — drop a file at src/assets/games/<slug>.jpg
+  poster?: string;
   platforms: Platform[];
   prices: { prim5?: number; prim4?: number; sec?: number };
-  accent: string; // tailwind gradient classes for fallback card
+  accent: string;
 };
 
 const GAMES: Game[] = [
@@ -28,7 +28,7 @@ const GAMES: Game[] = [
 
 // Try to load any user-provided posters at build time. The files are optional —
 // missing slugs gracefully fall back to a stylized typographic cover.
-const posterModules = import.meta.glob("../../assets/games/*.{jpg,jpeg,png,webp}", {
+const posterModules = import.meta.glob("@/assets/games/*.{jpg,jpeg,png,webp}", {
   eager: true,
   import: "default",
 }) as Record<string, string>;
@@ -70,18 +70,40 @@ function CoverArt({ game }: { game: Game }) {
   );
 }
 
-function PriceRow({ label, value }: { label: string; value?: number }) {
+function PriceBuyRow({ label, value, onBuy }: { label: string; value?: number; onBuy: (account: string, price: number) => void }) {
   if (!value) return null;
   return (
-    <div className="flex items-center justify-between text-xs py-1.5 border-b border-white/5 last:border-0">
-      <span className="text-white/50 tracking-wider font-display">{label}</span>
-      <span className="font-display"><span className="text-red-400">{value}</span> <span className="text-white/40 text-[10px]">EGP</span></span>
+    <div className="flex items-center justify-between gap-3 py-2.5 border-b border-white/5 last:border-0">
+      <span className="text-xs text-white/60 tracking-wider font-display">{label}</span>
+      <div className="flex items-center gap-2">
+        <span className="font-display text-sm"><span className="text-red-400">{value}</span> <span className="text-white/40 text-[10px]">جنيه</span></span>
+        <button
+          type="button"
+          onClick={() => onBuy(label, value)}
+          className="px-3 py-1.5 rounded-md bg-red-600 hover:bg-red-500 text-white text-[11px] font-display tracking-wider transition shadow-[0_0_12px_rgba(204,0,0,0.4)]"
+        >
+          احصل عليه — {value} 🎮
+        </button>
+      </div>
     </div>
   );
 }
 
 export function Offers() {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
+  const [order, setOrder] = useState<PurchaseOrder | null>(null);
+
+  const startBuy = (g: Game, account: string, price: number) => {
+    setOrder({
+      product: g.name,
+      type: g.name,
+      duration: null,
+      account,
+      platform: g.platforms.length === 1 ? g.platforms[0] : g.platforms.join(" / "),
+      price,
+    });
+    setOpenSlug(null);
+  };
 
   return (
     <section id="offers" className="relative py-24 px-4 sm:px-6 border-t border-white/5">
@@ -144,11 +166,10 @@ export function Offers() {
         </p>
       </div>
 
-      {/* Modal */}
+      {/* Price modal */}
       <AnimatePresence>
         {openSlug && (() => {
           const g = GAMES.find((x) => x.slug === openSlug)!;
-          const msg = `مرحباً FLIX STORE، أريد ${g.name} (${g.platforms.join(" / ")})`;
           return (
             <motion.div
               key="backdrop"
@@ -158,6 +179,7 @@ export function Offers() {
               transition={{ duration: 0.2 }}
               className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
               onClick={() => setOpenSlug(null)}
+              dir="rtl"
             >
               <motion.div
                 initial={{ opacity: 0, scale: 0.92, y: 20 }}
@@ -170,7 +192,7 @@ export function Offers() {
                 <button
                   onClick={() => setOpenSlug(null)}
                   aria-label="إغلاق"
-                  className="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-black/70 border border-white/15 flex items-center justify-center text-white/80 hover:text-white hover:border-red-500 transition"
+                  className="absolute top-3 left-3 z-10 w-9 h-9 rounded-full bg-black/70 border border-white/15 flex items-center justify-center text-white/80 hover:text-white hover:border-red-500 transition"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -191,37 +213,25 @@ export function Offers() {
                 </div>
 
                 <div className="p-5">
-                  <div className="text-xs tracking-[0.3em] text-white/40 mb-3">الأسعار المتاحة</div>
+                  <div className="flex items-center gap-2 text-xs tracking-[0.3em] text-white/40 mb-3">
+                    <Gamepad2 className="h-3.5 w-3.5 text-red-400" /> اختر نوع الحساب والسعر
+                  </div>
                   <div className="rounded-lg bg-white/[0.03] border border-white/10 px-4">
-                    <PriceRow label="PRIM 5" value={g.prices.prim5} />
-                    <PriceRow label="PRIM 4" value={g.prices.prim4} />
-                    <PriceRow label="SEC"    value={g.prices.sec} />
+                    <PriceBuyRow label="PRIM 5" value={g.prices.prim5} onBuy={(a, p) => startBuy(g, a, p)} />
+                    <PriceBuyRow label="PRIM 4" value={g.prices.prim4} onBuy={(a, p) => startBuy(g, a, p)} />
+                    <PriceBuyRow label="SEC"    value={g.prices.sec}   onBuy={(a, p) => startBuy(g, a, p)} />
                   </div>
-
-                  <div className="mt-5 flex flex-col gap-2">
-                    <a
-                      href={waLink(WA_NUMBERS[0], msg)}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="btn-flix !text-sm w-full justify-center"
-                    >
-                      <MessageCircle className="h-4 w-4" /> اطلب الآن عبر WhatsApp
-                    </a>
-                    <a
-                      href={waLink(WA_NUMBERS[1], msg)}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="btn-ghost-flix !py-2 !text-xs w-full justify-center"
-                    >
-                      واتساب بديل · {WA_NUMBERS[1].replace("20", "0")}
-                    </a>
-                  </div>
+                  <p className="text-[11px] text-white/40 text-center mt-3">
+                    اضغط على أي سعر لبدء عملية الدفع
+                  </p>
                 </div>
               </motion.div>
             </motion.div>
           );
         })()}
       </AnimatePresence>
+
+      <PurchaseFlow open={!!order} onClose={() => setOrder(null)} order={order} />
     </section>
   );
 }

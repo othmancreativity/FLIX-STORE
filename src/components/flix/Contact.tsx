@@ -15,17 +15,17 @@ export function Contact() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="font-display text-[clamp(3rem,9vw,6rem)] leading-none text-chrome"
+          className="font-display text-[clamp(2.5rem,7vw,5rem)] leading-tight text-chrome"
         >
-          جاهز تبدأ؟
+          جاهز تبدأ؟ احصل على اشتراكك الآن
         </motion.h2>
-        <p className="text-xl text-white/70 mt-4">تواصل معنا الآن على واتساب — رد فوري</p>
+        <p className="text-xl text-white/70 mt-4">اختر منتجك، ادفع، واستقبل اشتراكك خلال دقائق</p>
 
         <div className="grid sm:grid-cols-2 gap-4 mt-10 max-w-2xl mx-auto">
           {WA_NUMBERS.map((num, i) => (
             <motion.a
               key={num}
-              href={waLink(num, "مرحباً FLIX STORE، أريد الاستفسار عن منتجاتكم")}
+              href={waLink(num, "مرحباً FLIX STORE، أريد الطلب الآن")}
               target="_blank"
               rel="noreferrer"
               initial={{ opacity: 0, y: 20 }}
@@ -38,15 +38,15 @@ export function Contact() {
                 <MessageCircle className="w-7 h-7 text-green-400 group-hover:text-white" />
                 <span className="absolute inset-0 rounded-full pulse-green" />
               </span>
-              <span className="font-display text-2xl tracking-wider text-white" dir="ltr">
-                +2 0{num.slice(2, 5)} {num.slice(5, 8)} {num.slice(8)}
+              <span className="font-display text-lg sm:text-xl tracking-wider text-white" dir="ltr">
+                اطلب الآن — 0{num.slice(2)} 💬
               </span>
             </motion.a>
           ))}
         </div>
 
         <div className="mt-12 text-white/40 text-sm tracking-wider font-display">
-          INSTAPAY · VODAFONE CASH · WE PAY · TELDA · KLIVVR
+          INSTAPAY · VODAFONE CASH · TELDA
         </div>
       </div>
     </section>
