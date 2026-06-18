@@ -39,10 +39,21 @@ const METHODS: {
   detail: string;
   label: string;
 }[] = [
-  { id: "vodafone", icon: "📱", title: "فودافون كاش", detail: `اتصل أو حول على ${PAY_NUMBER}`, label: "Vodafone Cash" },
-  { id: "telda",    icon: "💳", title: "تيلدا",        detail: TELDA_ID, label: "Telda" },
-  { id: "instapay", icon: "💸", title: "انستاباي",     detail: `${PAY_NUMBER} — مصطفى محمد`, label: "InstaPay" },
-  
+  {
+    id: "vodafone",
+    icon: "📱",
+    title: "فودافون كاش",
+    detail: `اتصل أو حول على ${PAY_NUMBER}`,
+    label: "Vodafone Cash",
+  },
+  { id: "telda", icon: "💳", title: "تيلدا", detail: TELDA_ID, label: "Telda" },
+  {
+    id: "instapay",
+    icon: "💸",
+    title: "انستاباي",
+    detail: `${PAY_NUMBER} — مصطفى محمد`,
+    label: "InstaPay",
+  },
 ];
 
 function CopyBtn({ value }: { value: string }) {
@@ -55,11 +66,17 @@ function CopyBtn({ value }: { value: string }) {
           await navigator.clipboard.writeText(value);
           setCopied(true);
           setTimeout(() => setCopied(false), 1500);
-        } catch {/* noop */}
+        } catch {
+          /* noop */
+        }
       }}
       className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs bg-white/5 border border-white/15 hover:border-red-500/60 hover:text-white text-white/80 transition"
     >
-      {copied ? <Check className="h-3.5 w-3.5 text-green-400" /> : <Copy className="h-3.5 w-3.5" />}
+      {copied ? (
+        <Check className="h-3.5 w-3.5 text-green-400" />
+      ) : (
+        <Copy className="h-3.5 w-3.5" />
+      )}
       {copied ? "تم النسخ" : "نسخ"}
     </button>
   );
@@ -97,13 +114,19 @@ export function PurchaseFlow({
   }, [open]);
 
   useEffect(() => {
-    if (!receipt) { setReceiptUrl(null); return; }
+    if (!receipt) {
+      setReceiptUrl(null);
+      return;
+    }
     const url = URL.createObjectURL(receipt);
     setReceiptUrl(url);
     return () => URL.revokeObjectURL(url);
   }, [receipt]);
 
-  const selectedMethod = useMemo(() => METHODS.find((m) => m.id === method) || null, [method]);
+  const selectedMethod = useMemo(
+    () => METHODS.find((m) => m.id === method) || null,
+    [method],
+  );
 
   if (!order) return null;
 
@@ -186,7 +209,11 @@ export function PurchaseFlow({
                     >
                       {s}
                     </span>
-                    {s < 3 && <span className={`w-6 h-px ${step > s ? "bg-red-500" : "bg-white/10"}`} />}
+                    {s < 3 && (
+                      <span
+                        className={`w-6 h-px ${step > s ? "bg-red-500" : "bg-white/10"}`}
+                      />
+                    )}
                   </div>
                 ))}
                 <span className="ms-auto">
@@ -201,24 +228,31 @@ export function PurchaseFlow({
               {/* STEP 1 */}
               {step === 1 && (
                 <div className="space-y-5">
-                  <h3 className="font-display text-2xl text-chrome">تأكيد طلبك</h3>
+                  <h3 className="font-display text-2xl text-chrome">
+                    تأكيد طلبك
+                  </h3>
 
                   <div className="rounded-xl border border-red-500/30 bg-gradient-to-b from-red-950/30 to-black/30 p-4 space-y-2.5">
                     <div className="flex items-center gap-2 text-white">
                       <Gamepad2 className="h-4 w-4 text-red-400" />
-                      <span className="font-display tracking-wide">{order.product}</span>
+                      <span className="font-display tracking-wide">
+                        {order.product}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2 text-white/80 text-sm flex-wrap">
                       {order.duration && (
                         <>
                           <Clock className="h-4 w-4 text-red-400" />
-                          المدة: <span className="text-white">{order.duration}</span>
+                          المدة:{" "}
+                          <span className="text-white">{order.duration}</span>
                           <span className="text-white/30">·</span>
                         </>
                       )}
                       {order.platform && (
                         <>
-                          <span className="text-white/70">المنصة: {order.platform}</span>
+                          <span className="text-white/70">
+                            المنصة: {order.platform}
+                          </span>
                           <span className="text-white/30">·</span>
                         </>
                       )}
@@ -226,13 +260,18 @@ export function PurchaseFlow({
                     </div>
                     <div className="flex items-center gap-2 text-white text-sm">
                       <Wallet className="h-4 w-4 text-red-400" />
-                      المبلغ: <span className="font-display text-2xl text-red-stroke ms-1">{order.price}</span>
+                      المبلغ:{" "}
+                      <span className="font-display text-2xl text-red-stroke ms-1">
+                        {order.price}
+                      </span>
                       <span className="text-white/60">جنيه</span>
                     </div>
                   </div>
 
                   <div>
-                    <div className="text-sm text-white/70 mb-3">اختر طريقة الدفع:</div>
+                    <div className="text-sm text-white/70 mb-3">
+                      اختر طريقة الدفع:
+                    </div>
                     <div className="grid grid-cols-2 gap-2.5">
                       {METHODS.map((m) => {
                         const active = method === m.id;
@@ -253,8 +292,12 @@ export function PurchaseFlow({
                               </span>
                             )}
                             <div className="text-xl mb-1">{m.icon}</div>
-                            <div className="font-display text-sm text-white">{m.title}</div>
-                            <div className="text-[11px] text-white/55 mt-0.5 leading-tight">{m.detail}</div>
+                            <div className="font-display text-sm text-white">
+                              {m.title}
+                            </div>
+                            <div className="text-[11px] text-white/55 mt-0.5 leading-tight">
+                              {m.detail}
+                            </div>
                           </button>
                         );
                       })}
@@ -274,28 +317,43 @@ export function PurchaseFlow({
               {/* STEP 2 */}
               {step === 2 && selectedMethod && (
                 <div className="space-y-5">
-                  <h3 className="font-display text-2xl text-chrome">خطوات الدفع</h3>
+                  <h3 className="font-display text-2xl text-chrome">
+                    خطوات الدفع
+                  </h3>
 
                   <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4 space-y-3">
                     <div className="flex items-center gap-2 font-display text-white">
-                      <span className="text-xl">{selectedMethod.icon}</span> {selectedMethod.title}
+                      <span className="text-xl">{selectedMethod.icon}</span>{" "}
+                      {selectedMethod.title}
                     </div>
                     <div className="text-sm text-white/70">
                       حول مبلغ{" "}
-                      <span className="font-display text-red-300 text-base">{order.price}</span>{" "}
+                      <span className="font-display text-red-300 text-base">
+                        {order.price}
+                      </span>{" "}
                       جنيه على:
                     </div>
 
                     {method === "vodafone" && (
                       <div className="flex items-center justify-between gap-2 rounded-lg bg-black/40 border border-white/10 p-3">
-                        <div dir="ltr" className="font-display text-lg text-white tracking-wider">📞 {PAY_NUMBER}</div>
+                        <div
+                          dir="ltr"
+                          className="font-display text-lg text-white tracking-wider"
+                        >
+                          📞 {PAY_NUMBER}
+                        </div>
                         <CopyBtn value={PAY_NUMBER} />
                       </div>
                     )}
 
                     {method === "telda" && (
                       <div className="flex items-center justify-between gap-2 rounded-lg bg-black/40 border border-white/10 p-3">
-                        <div dir="ltr" className="font-display text-lg text-white tracking-wider">👤 {TELDA_ID}</div>
+                        <div
+                          dir="ltr"
+                          className="font-display text-lg text-white tracking-wider"
+                        >
+                          👤 {TELDA_ID}
+                        </div>
                         <CopyBtn value={TELDA_ID} />
                       </div>
                     )}
@@ -304,8 +362,15 @@ export function PurchaseFlow({
                       <div className="space-y-2">
                         <div className="flex items-center justify-between gap-2 rounded-lg bg-black/40 border border-white/10 p-3">
                           <div>
-                            <div dir="ltr" className="font-display text-lg text-white tracking-wider">📞 {PAY_NUMBER}</div>
-                            <div className="text-xs text-white/60 mt-0.5">👤 مصطفى محمد</div>
+                            <div
+                              dir="ltr"
+                              className="font-display text-lg text-white tracking-wider"
+                            >
+                              📞 {PAY_NUMBER}
+                            </div>
+                            <div className="text-xs text-white/60 mt-0.5">
+                              👤 مصطفى محمد
+                            </div>
                           </div>
                           <CopyBtn value={PAY_NUMBER} />
                         </div>
@@ -315,25 +380,30 @@ export function PurchaseFlow({
                           rel="noreferrer"
                           className="inline-flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-lg bg-red-600/15 border border-red-500/50 hover:bg-red-600/25 text-red-200 text-sm transition"
                         >
-                          <ExternalLink className="h-4 w-4" /> افتح رابط الدفع المباشر
+                          <ExternalLink className="h-4 w-4" /> افتح رابط الدفع
+                          المباشر
                         </a>
                       </div>
                     )}
-
                   </div>
 
                   {/* Refund notice */}
                   <div className="rounded-xl border-2 border-red-500/60 bg-red-500/10 p-3.5 flex gap-2.5 text-sm text-red-100">
                     <AlertTriangle className="h-5 w-5 text-red-400 shrink-0 mt-0.5" />
                     <div>
-                      <div className="font-display tracking-wider mb-0.5">⚠️ مهم جداً</div>
-                      ممنوع استرجاع الفلوس بعد التحويل لأي سبب — إلا في حالة خطأ من جانبنا أو تأخير في التسليم.
+                      <div className="font-display tracking-wider mb-0.5">
+                        ⚠️ مهم جداً
+                      </div>
+                      ممنوع استرجاع الفلوس بعد التحويل لأي سبب — إلا في حالة خطأ
+                      من جانبنا أو تأخير في التسليم.
                     </div>
                   </div>
 
                   {/* Upload */}
                   <div>
-                    <div className="text-sm text-white/80 mb-2">ارفع صورة التحويل 📸</div>
+                    <div className="text-sm text-white/80 mb-2">
+                      ارفع صورة التحويل 📸
+                    </div>
                     <input
                       ref={fileRef}
                       type="file"
@@ -348,14 +418,24 @@ export function PurchaseFlow({
                     >
                       {receiptUrl ? (
                         <>
-                          <img src={receiptUrl} alt="إيصال" className="max-h-32 rounded-md border border-white/15" />
-                          <span className="text-xs text-green-400 mt-1">✓ تم اختيار الصورة — اضغط للتغيير</span>
+                          <img
+                            src={receiptUrl}
+                            alt="إيصال"
+                            className="max-h-32 rounded-md border border-white/15"
+                          />
+                          <span className="text-xs text-green-400 mt-1">
+                            ✓ تم اختيار الصورة — اضغط للتغيير
+                          </span>
                         </>
                       ) : (
                         <>
                           <Upload className="h-7 w-7 text-red-400" />
-                          <span className="text-sm">اضغط لاختيار صورة الإيصال</span>
-                          <span className="text-[11px] text-white/40">JPG / PNG / WEBP</span>
+                          <span className="text-sm">
+                            اضغط لاختيار صورة الإيصال
+                          </span>
+                          <span className="text-[11px] text-white/40">
+                            JPG / PNG / WEBP
+                          </span>
                         </>
                       )}
                     </button>
@@ -364,7 +444,9 @@ export function PurchaseFlow({
                   {/* Fields */}
                   <div className="grid gap-3">
                     <div>
-                      <label className="block text-xs text-white/60 mb-1.5">الاسم</label>
+                      <label className="block text-xs text-white/60 mb-1.5">
+                        الاسم
+                      </label>
                       <input
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -373,10 +455,14 @@ export function PurchaseFlow({
                       />
                     </div>
                     <div>
-                      <label className="block text-xs text-white/60 mb-1.5">واتساب التواصل</label>
+                      <label className="block text-xs text-white/60 mb-1.5">
+                        واتساب التواصل
+                      </label>
                       <input
                         value={wa}
-                        onChange={(e) => setWa(e.target.value.replace(/[^\d+]/g, ""))}
+                        onChange={(e) =>
+                          setWa(e.target.value.replace(/[^\d+]/g, ""))
+                        }
                         inputMode="tel"
                         dir="ltr"
                         placeholder="رقم واتساب التواصل معك"
@@ -401,7 +487,8 @@ export function PurchaseFlow({
                     </button>
                   </div>
                   <p className="text-[11px] text-white/40 text-center">
-                    سيفتح واتساب برسالة جاهزة — أرسل صورة الإيصال داخل المحادثة بعد فتحها.
+                    سيفتح واتساب برسالة جاهزة — أرسل صورة الإيصال داخل المحادثة
+                    بعد فتحها.
                   </p>
                 </div>
               )}
@@ -412,24 +499,45 @@ export function PurchaseFlow({
                   <div className="mx-auto w-16 h-16 rounded-full bg-green-500/15 border border-green-500/50 flex items-center justify-center">
                     <PartyPopper className="h-8 w-8 text-green-400" />
                   </div>
-                  <h3 className="font-display text-3xl text-chrome">✅ تم إرسال طلبك بنجاح!</h3>
+                  <h3 className="font-display text-3xl text-chrome">
+                    ✅ تم إرسال طلبك بنجاح!
+                  </h3>
                   <div className="rounded-xl border-2 border-red-500/60 bg-black/60 p-5">
-                    <div className="text-xs text-white/60 tracking-wider mb-2">🔑 كود طلبك</div>
-                    <div dir="ltr" className="font-display text-red-stroke" style={{ fontSize: "2.5rem", fontWeight: 900, letterSpacing: "0.05em" }}>
+                    <div className="text-xs text-white/60 tracking-wider mb-2">
+                      🔑 كود طلبك
+                    </div>
+                    <div
+                      dir="ltr"
+                      className="font-display text-red-stroke"
+                      style={{
+                        fontSize: "2.5rem",
+                        fontWeight: 900,
+                        letterSpacing: "0.05em",
+                      }}
+                    >
                       {orderId}
                     </div>
-                    <div className="text-xs text-white/50 mt-2">احتفظ بالكود ده عشان تتابع طلبك</div>
+                    <div className="text-xs text-white/50 mt-2">
+                      احتفظ بالكود ده عشان تتابع طلبك
+                    </div>
                   </div>
 
                   <div className="rounded-xl border border-amber-500/40 bg-gradient-to-b from-amber-500/5 to-amber-900/10 px-5 py-4">
-                    <div className="salla-text text-3xl sm:text-4xl">صلِّ على النبي ﷺ</div>
+                    <div className="salla-text text-3xl sm:text-4xl">
+                      صلِّ على النبي ﷺ
+                    </div>
                   </div>
                   <p className="text-white/70 text-sm leading-relaxed">
-                    سيتم التواصل معك على: <span dir="ltr" className="text-white">{wa}</span>
+                    سيتم التواصل معك على:{" "}
+                    <span dir="ltr" className="text-white">
+                      {wa}
+                    </span>
                     <br />
                     خلال دقائق بعد التحقق من الدفع والصورة
                     <br />
-                    <span className="text-red-300 text-xs">⚠️ لا تنسَ إرسال صورة الإيصال داخل محادثة واتساب</span>
+                    <span className="text-red-300 text-xs">
+                      ⚠️ لا تنسَ إرسال صورة الإيصال داخل محادثة واتساب
+                    </span>
                   </p>
 
                   <div className="grid sm:grid-cols-2 gap-2">
@@ -439,7 +547,8 @@ export function PurchaseFlow({
                       rel="noreferrer"
                       className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-green-600/15 border border-green-500/50 hover:bg-green-600/25 text-green-200 text-sm transition"
                     >
-                      <MessageCircle className="h-4 w-4" /> تواصل معنا · 01109664083
+                      <MessageCircle className="h-4 w-4" /> تواصل معنا ·
+                      01109664083
                     </a>
                     <a
                       href={`https://wa.me/201014956483`}
@@ -447,11 +556,15 @@ export function PurchaseFlow({
                       rel="noreferrer"
                       className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-lg bg-green-600/15 border border-green-500/50 hover:bg-green-600/25 text-green-200 text-sm transition"
                     >
-                      <MessageCircle className="h-4 w-4" /> تواصل معنا · 01014956483
+                      <MessageCircle className="h-4 w-4" /> تواصل معنا ·
+                      01014956483
                     </a>
                   </div>
 
-                  <button onClick={onClose} className="btn-ghost-flix !py-2.5 !text-sm">
+                  <button
+                    onClick={onClose}
+                    className="btn-ghost-flix !py-2.5 !text-sm"
+                  >
                     العودة للرئيسية
                   </button>
                 </div>
