@@ -180,6 +180,11 @@ function SlotRow({
 export function Offers() {
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const [order, setOrder] = useState<PurchaseOrder | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredGames = searchQuery.trim()
+    ? GAMES.filter((g) => g.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    : GAMES;
 
   const startBuy = (g: Game, account: string, price: number) => {
     setOrder({
@@ -207,8 +212,40 @@ export function Offers() {
           <p className="text-white/60 mt-3">اضغط على أي لعبة لعرض الأسعار وزر الطلب</p>
         </div>
 
+        {/* ===== Search Bar ===== */}
+        <div className="w-full max-w-xl mx-auto mb-8 px-2">
+          <div className="relative flex items-center">
+            <svg className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
+            </svg>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="ابحث عن لعبة..."
+              dir="rtl"
+              className="w-full bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl py-3 pr-12 pl-10 text-white placeholder-gray-400 text-base outline-none focus:border-red-400 focus:ring-2 focus:ring-red-400/30 transition-all duration-200 shadow-lg"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+          </div>
+          {searchQuery && (
+            <p className="text-center text-sm text-gray-400 mt-2">
+              {filteredGames.length === 0 ? "مفيش نتائج 😔" : `${filteredGames.length} لعبة`}
+            </p>
+          )}
+        </div>
+
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
-          {GAMES.map((g, i) => {
+          {filteredGames.map((g, i) => {
             const isOpen = openSlug === g.slug;
             return (
               <motion.button
