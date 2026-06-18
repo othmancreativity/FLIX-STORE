@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Sparkles, Gamepad2, AlertTriangle } from "lucide-react";
 import { PurchaseFlow, type PurchaseOrder } from "./PurchaseFlow";
-import GameSearch from "./GameSearch";
+
 
 type Tier = "Essential" | "Extra";
 type Duration = "شهر" | "3 شهور" | "سنة";
@@ -50,7 +50,6 @@ const PRICES: Record<Tier, Record<Duration, Record<AccountType, number>>> = {
 };
 
 export function Products() {
-  const [filteredGames, setFilteredGames] = useState<typeof products>(products);
 
   const [tier, setTier] = useState<Tier>("Extra");
   const [dur, setDur] = useState<Duration>("شهر");
@@ -92,11 +91,6 @@ export function Products() {
           <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full opacity-25 blur-3xl"
             style={{ background: "radial-gradient(circle, #cc0000, transparent 70%)" }} />
 
-      <GameSearch
-        games={products}
-        onFilter={setFilteredGames}
-        placeholder="ابحث عن لعبة..."
-      />
 
           <div className="relative grid lg:grid-cols-2 gap-10">
             <div>
