@@ -16,19 +16,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "FLIX STORE | اشتراكات PlayStation Plus وألعاب PS4/PS5 في مصر" },
-      {
-        name: "description",
-        content:
-          "FLIX STORE — اشتراكات PlayStation Plus (Essential / Extra) وأحدث ألعاب PS4 و PS5 بأسعار Prim5 / Prim4 / Sec وتسليم فوري في مصر.",
-      },
-      {
-        property: "og:title",
-        content: "FLIX STORE | متجر الترفيه الرقمي الأول",
-      },
-      {
-        property: "og:description",
-        content: "اشتراكات PS Plus وعروض ألعاب PS4/PS5 بتسليم فوري ودعم 24/7.",
-      },
+      { name: "description", content: "FLIX STORE — اشتراكات PlayStation Plus (Essential / Extra) وأحدث ألعاب PS4 و PS5 بأسعار Prim5 / Prim4 / Sec وتسليم فوري في مصر." },
+      { property: "og:title", content: "FLIX STORE | متجر الترفيه الرقمي الأول" },
+      { property: "og:description", content: "اشتراكات PS Plus وعروض ألعاب PS4/PS5 بتسليم فوري ودعم 24/7." },
     ],
   }),
   component: Index,

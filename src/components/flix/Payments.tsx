@@ -12,9 +12,7 @@ export function Payments() {
     <section className="relative py-20 px-4 sm:px-6">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-10">
-          <span className="text-red-400 text-sm tracking-[0.3em] font-display">
-            — طرق الدفع —
-          </span>
+          <span className="text-red-400 text-sm tracking-[0.3em] font-display">— طرق الدفع —</span>
           <h2 className="section-heading text-chrome mt-2">ادفع بسهولة</h2>
         </div>
 
@@ -28,9 +26,7 @@ export function Payments() {
               transition={{ delay: i * 0.08 }}
               className="card-flix p-6 text-center"
             >
-              <div className="font-display text-xl text-white tracking-wide">
-                {m.name}
-              </div>
+              <div className="font-display text-xl text-white tracking-wide">{m.name}</div>
               <div className="text-xs text-white/50 mt-1">{m.sub}</div>
             </motion.div>
           ))}

@@ -1,94 +1,78 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Flame, ChevronDown, X, Gamepad2 } from "lucide-react";
+import { Flame, ChevronDown, X, Gamepad2, Lock } from "lucide-react";
 import { PurchaseFlow, type PurchaseOrder } from "./PurchaseFlow";
 
 type Platform = "PS4" | "PS5";
+type Slots = { prim5: number | null; prim4: number | null; sec: number | null };
 type Game = {
   slug: string;
   name: string;
-  poster?: string;
   platforms: Platform[];
-  prices: { prim5?: number; prim4?: number; sec?: number };
+  slots: Slots;
   accent: string;
 };
 
+/**
+ * Single source of truth for the PlayStation Games catalog.
+ * Each price is the store's EGP price for that slot. `null` means the slot
+ * is not available for that game (rendered disabled/grayed in the UI).
+ */
 const GAMES: Game[] = [
-  {
-    slug: "gta5",
-    name: "Grand Theft Auto V",
-    platforms: ["PS4", "PS5"],
-    prices: { prim5: 500, prim4: 350, sec: 300 },
-    accent: "from-rose-700 via-red-900 to-black",
-  },
-  {
-    slug: "fc26",
-    name: "EA Sports FC 26",
-    platforms: ["PS4", "PS5"],
-    prices: { prim5: 600, prim4: 350, sec: 300 },
-    accent: "from-emerald-600 via-emerald-900 to-black",
-  },
-  {
-    slug: "bf6",
-    name: "Battlefield 6",
-    platforms: ["PS5"],
-    prices: { prim5: 1350, sec: 950 },
-    accent: "from-orange-600 via-amber-900 to-black",
-  },
-  {
-    slug: "007",
-    name: "007: First Light",
-    platforms: ["PS5"],
-    prices: { prim5: 1600, sec: 1200 },
-    accent: "from-yellow-600 via-zinc-800 to-black",
-  },
-  {
-    slug: "yotei",
-    name: "Ghost of Yōtei",
-    platforms: ["PS5"],
-    prices: { prim5: 1500, sec: 1000 },
-    accent: "from-red-600 via-rose-900 to-black",
-  },
-  {
-    slug: "rdr2",
-    name: "Red Dead Redemption II",
-    platforms: ["PS4", "PS5"],
-    prices: { prim5: 500, prim4: 350, sec: 300 },
-    accent: "from-amber-700 via-orange-950 to-black",
-  },
-  {
-    slug: "wwe26",
-    name: "WWE 2K26",
-    platforms: ["PS5"],
-    prices: { prim5: 1600, sec: 1200 },
-    accent: "from-red-700 via-red-950 to-black",
-  },
-  {
-    slug: "minecraft",
-    name: "Minecraft",
-    platforms: ["PS4", "PS5"],
-    prices: { prim5: 500, prim4: 350, sec: 300 },
-    accent: "from-lime-600 via-emerald-900 to-black",
-  },
-  {
-    slug: "re-requiem",
-    name: "Resident Evil: Requiem",
-    platforms: ["PS5"],
-    prices: { prim5: 1450, sec: 1000 },
-    accent: "from-red-800 via-zinc-900 to-black",
-  },
-  {
-    slug: "wolverine",
-    name: "Marvel's Wolverine",
-    platforms: ["PS5"],
-    prices: { prim5: 1600, sec: 1200 },
-    accent: "from-yellow-600 via-amber-900 to-black",
-  },
+  // —— Legacy non-duplicate titles kept from the original catalog ——
+  { slug: "gta5",        name: "Grand Theft Auto V",      platforms: ["PS4", "PS5"], slots: { prim5: 500,  prim4: 350,  sec: 300  }, accent: "from-rose-700 via-red-900 to-black" },
+  { slug: "bf6",         name: "Battlefield 6",           platforms: ["PS5"],        slots: { prim5: 1350, prim4: null, sec: 950  }, accent: "from-orange-600 via-amber-900 to-black" },
+  { slug: "yotei",       name: "Ghost of Yōtei",          platforms: ["PS5"],        slots: { prim5: 1500, prim4: null, sec: 1000 }, accent: "from-red-600 via-rose-900 to-black" },
+  { slug: "rdr2",        name: "Red Dead Redemption II",  platforms: ["PS4", "PS5"], slots: { prim5: 500,  prim4: 350,  sec: 300  }, accent: "from-amber-700 via-orange-950 to-black" },
+  { slug: "g-eldenring", name: "Elden Ring",              platforms: ["PS4", "PS5"], slots: { prim5: 900,  prim4: 900,  sec: 900  }, accent: "from-yellow-700 via-amber-950 to-black" },
+  { slug: "g-nightreigndx", name: "Elden Ring: Nightreign — Deluxe Edition", platforms: ["PS5"], slots: { prim5: 2000, prim4: null, sec: null }, accent: "from-amber-600 via-yellow-900 to-black" },
+
+  // —— The 40 catalog games (exact prices + slot availability per spec) ——
+  { slug: "wolverine",     name: "Marvel's Wolverine",                 platforms: ["PS5"],        slots: { prim5: 2000, prim4: null, sec: 2000 }, accent: "from-yellow-600 via-amber-900 to-black" },
+  { slug: "fc26",          name: "FC 26",                              platforms: ["PS4"],        slots: { prim5: null, prim4: 500,  sec: 500  }, accent: "from-emerald-600 via-emerald-900 to-black" },
+  { slug: "007",           name: "007: First Light",                   platforms: ["PS4", "PS5"], slots: { prim5: 1900, prim4: 1900, sec: 1900 }, accent: "from-yellow-600 via-zinc-800 to-black" },
+  { slug: "pp5",           name: "Poppy Playtime 5",                   platforms: ["PS4"],        slots: { prim5: null, prim4: 900,  sec: 900  }, accent: "from-pink-600 via-rose-900 to-black" },
+  { slug: "pp4",           name: "Poppy Playtime 4",                   platforms: ["PS4", "PS5"], slots: { prim5: 500,  prim4: 500,  sec: 500  }, accent: "from-pink-600 via-rose-900 to-black" },
+  { slug: "pp3",           name: "Poppy Playtime 3",                   platforms: ["PS4", "PS5"], slots: { prim5: 350,  prim4: 350,  sec: 350  }, accent: "from-pink-600 via-rose-900 to-black" },
+  { slug: "pp2",           name: "Poppy Playtime 2",                   platforms: ["PS4"],        slots: { prim5: null, prim4: 240,  sec: 240  }, accent: "from-pink-600 via-rose-900 to-black" },
+  { slug: "pp1",           name: "Poppy Playtime",                     platforms: ["PS4", "PS5"], slots: { prim5: 190,  prim4: 190,  sec: 190  }, accent: "from-pink-600 via-rose-900 to-black" },
+  { slug: "g-gta6",        name: "Grand Theft Auto VI",                platforms: ["PS5"],        slots: { prim5: 2650, prim4: null, sec: 2650 }, accent: "from-pink-600 via-rose-900 to-black" },
+  { slug: "g-forza6",      name: "Forza Horizon",                      platforms: ["PS5"],        slots: { prim5: 2200, prim4: null, sec: 2200 }, accent: "from-blue-600 via-indigo-900 to-black" },
+  { slug: "g-re9",         name: "Resident Evil 9",                    platforms: ["PS5"],        slots: { prim5: 1500, prim4: null, sec: 1500 }, accent: "from-red-800 via-zinc-900 to-black" },
+  { slug: "wwe26",         name: "WWE 2K26",                           platforms: ["PS5"],        slots: { prim5: 1500, prim4: null, sec: null }, accent: "from-red-700 via-red-950 to-black" },
+  { slug: "g-dyinglight",  name: "Dying Light: The Beast",             platforms: ["PS5"],        slots: { prim5: 1200, prim4: null, sec: 1200 }, accent: "from-amber-600 via-yellow-900 to-black" },
+  { slug: "g-ghostrecon",  name: "Ghost Recon",                        platforms: ["PS4"],        slots: { prim5: null, prim4: 200,  sec: 200  }, accent: "from-stone-600 via-stone-900 to-black" },
+  { slug: "g-amongus",     name: "Among Us",                           platforms: ["PS5"],        slots: { prim5: 130,  prim4: null, sec: 130  }, accent: "from-rose-500 via-rose-900 to-black" },
+  { slug: "g-tombraider",  name: "Tomb Raider Trilogy",                platforms: ["PS4"],        slots: { prim5: null, prim4: 200,  sec: 200  }, accent: "from-orange-700 via-stone-900 to-black" },
+  { slug: "g-arkascend",   name: "ARK: Survival Ascended",             platforms: ["PS4", "PS5"], slots: { prim5: null, prim4: null, sec: 1100 }, accent: "from-lime-700 via-emerald-950 to-black" },
+  { slug: "g-arkevolved",  name: "ARK: Survival Evolved",              platforms: ["PS5"],        slots: { prim5: 500,  prim4: null, sec: 500  }, accent: "from-emerald-700 via-emerald-950 to-black" },
+  { slug: "g-nightreign",  name: "Elden Ring: Nightreign",             platforms: ["PS4"],        slots: { prim5: null, prim4: 1400, sec: null }, accent: "from-amber-700 via-yellow-950 to-black" },
+  { slug: "g-ln3",         name: "Little Nightmares 3",                platforms: ["PS4"],        slots: { prim5: null, prim4: 900,  sec: null }, accent: "from-slate-700 via-zinc-900 to-black" },
+  { slug: "g-ln2",         name: "Little Nightmares 2",                platforms: ["PS4"],        slots: { prim5: null, prim4: 450,  sec: null }, accent: "from-slate-700 via-zinc-900 to-black" },
+  { slug: "g-ln1",         name: "Little Nightmares 1",                platforms: ["PS4"],        slots: { prim5: null, prim4: 300,  sec: null }, accent: "from-slate-700 via-zinc-900 to-black" },
+  { slug: "g-batman",      name: "Batman: Arkham Collection",          platforms: ["PS4", "PS5"], slots: { prim5: 350,  prim4: 350,  sec: 350  }, accent: "from-zinc-700 via-zinc-950 to-black" },
+  { slug: "g-r6siege",     name: "Rainbow Six Siege",                  platforms: ["PS4", "PS5"], slots: { prim5: 550,  prim4: 550,  sec: 550  }, accent: "from-sky-700 via-zinc-900 to-black" },
+  { slug: "g-choochoo",    name: "Choo-Choo Charles",                  platforms: ["PS4"],        slots: { prim5: null, prim4: 700,  sec: 700  }, accent: "from-red-700 via-stone-900 to-black" },
+  { slug: "g-bo3",         name: "Call of Duty: Black Ops 3",          platforms: ["PS4", "PS5"], slots: { prim5: 750,  prim4: 750,  sec: 750  }, accent: "from-orange-700 via-stone-950 to-black" },
+  { slug: "g-bo4",         name: "Call of Duty: Black Ops 4",          platforms: ["PS4"],        slots: { prim5: null, prim4: 400,  sec: null }, accent: "from-orange-700 via-stone-950 to-black" },
+  { slug: "g-reanimal",    name: "REANIMAL",                           platforms: ["PS5"],        slots: { prim5: 1250, prim4: null, sec: 1250 }, accent: "from-fuchsia-700 via-purple-950 to-black" },
+  { slug: "g-dl2",         name: "Dying Light 2",                      platforms: ["PS4", "PS5"], slots: { prim5: 500,  prim4: 500,  sec: 500  }, accent: "from-amber-600 via-yellow-900 to-black" },
+  { slug: "g-dl1",         name: "Dying Light",                        platforms: ["PS4", "PS5"], slots: { prim5: 225,  prim4: 225,  sec: 225  }, accent: "from-amber-700 via-yellow-950 to-black" },
+  { slug: "g-overcooked2", name: "Overcooked 2",                       platforms: ["PS4", "PS5"], slots: { prim5: 300,  prim4: 300,  sec: 300  }, accent: "from-orange-500 via-amber-800 to-black" },
+  { slug: "g-re2",         name: "Resident Evil 2",                    platforms: ["PS4"],        slots: { prim5: null, prim4: 350,  sec: 350  }, accent: "from-red-800 via-zinc-900 to-black" },
+  { slug: "g-re4remake",   name: "Resident Evil 4 Remake (Arabic)",    platforms: ["PS5"],        slots: { prim5: 500,  prim4: null, sec: 500  }, accent: "from-red-800 via-zinc-900 to-black" },
+  { slug: "g-acvalhalla",  name: "Assassin's Creed Valhalla",          platforms: ["PS4", "PS5"], slots: { prim5: null, prim4: null, sec: 300  }, accent: "from-slate-700 via-stone-900 to-black" },
+  { slug: "g-mk1",         name: "Mortal Kombat 1",                    platforms: ["PS5"],        slots: { prim5: 800,  prim4: null, sec: 800  }, accent: "from-red-700 via-zinc-950 to-black" },
+  { slug: "g-re3",         name: "Resident Evil 3",                    platforms: ["PS4"],        slots: { prim5: null, prim4: 350,  sec: 350  }, accent: "from-red-800 via-zinc-900 to-black" },
+  { slug: "g-tekken7",     name: "Tekken 7",                           platforms: ["PS4", "PS5"], slots: { prim5: 350,  prim4: 350,  sec: 350  }, accent: "from-purple-700 via-zinc-950 to-black" },
+  { slug: "minecraft",     name: "Minecraft",                          platforms: ["PS4", "PS5"], slots: { prim5: 600,  prim4: 600,  sec: 600  }, accent: "from-lime-600 via-emerald-900 to-black" },
+  { slug: "g-gowragnarok", name: "God of War Ragnarök",                platforms: ["PS4", "PS5"], slots: { prim5: 800,  prim4: 800,  sec: 800  }, accent: "from-sky-700 via-slate-950 to-black" },
+  { slug: "g-codww2",      name: "Call of Duty: WWII",                 platforms: ["PS4", "PS5"], slots: { prim5: 200,  prim4: 200,  sec: 200  }, accent: "from-stone-700 via-zinc-950 to-black" },
 ];
 
-// Try to load any user-provided posters at build time. The files are optional —
-// missing slugs gracefully fall back to a stylized typographic cover.
-const posterModules = import.meta.glob("../../assets/games/*.{jpg,jpeg,png,webp}", {
+// Posters live in src/assets/games/<slug>.{jpg,png,webp}. Missing files
+// fall back to a typographic cover — never AI-generated art.
+const posterModules = import.meta.glob("@/assets/games/*.{jpg,jpeg,png,webp}", {
   eager: true,
   import: "default",
 }) as Record<string, string>;
@@ -110,7 +94,6 @@ function CoverArt({ game }: { game: Game }) {
       />
     );
   }
-  // Fallback — stylized typographic cover, no fake/AI art
   const initials = game.name
     .replace(/[^A-Za-z0-9 ]/g, "")
     .split(" ")
@@ -120,59 +103,50 @@ function CoverArt({ game }: { game: Game }) {
     .join("")
     .toUpperCase();
   return (
-    <div
-      className={`absolute inset-0 bg-gradient-to-br ${game.accent} flex items-center justify-center`}
-    >
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 60%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
-      <span className="relative font-display text-6xl text-white/90 tracking-tighter drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
-        {initials}
-      </span>
+    <div className={`absolute inset-0 bg-gradient-to-br ${game.accent} flex items-center justify-center`}>
+      <div className="absolute inset-0 opacity-30"
+        style={{ backgroundImage: "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 60%)" }} />
+      <div className="absolute inset-0 opacity-20"
+        style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
+      <span className="relative font-display text-6xl text-white/90 tracking-tighter drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">{initials}</span>
     </div>
   );
 }
 
-function PriceBuyRow({
+function SlotRow({
   label,
   value,
   onBuy,
 }: {
   label: string;
-  value?: number;
+  value: number | null;
   onBuy: (account: string, price: number) => void;
 }) {
-  if (!value) return null;
+  const available = value !== null;
   return (
-    <div className="flex items-center justify-between gap-3 py-2.5 border-b border-white/5 last:border-0">
-      <span className="text-xs text-white/60 tracking-wider font-display">
-        {label}
-      </span>
-      <div className="flex items-center gap-2">
-        <span className="font-display text-sm">
-          <span className="text-red-400">{value}</span>{" "}
-          <span className="text-white/40 text-[10px]">جنيه</span>
+    <div
+      className={`flex items-center justify-between gap-3 py-2.5 border-b border-white/5 last:border-0 ${available ? "" : "opacity-50"}`}
+    >
+      <span className="text-xs text-white/60 tracking-wider font-display">{label}</span>
+      {available ? (
+        <div className="flex items-center gap-2">
+          <span className="font-display text-sm">
+            <span className="text-red-400">{value}</span>{" "}
+            <span className="text-white/40 text-[10px]">جنيه</span>
+          </span>
+          <button
+            type="button"
+            onClick={() => onBuy(label, value!)}
+            className="px-3 py-1.5 rounded-md bg-red-600 hover:bg-red-500 text-white text-[11px] font-display tracking-wider transition shadow-[0_0_12px_rgba(204,0,0,0.4)]"
+          >
+            احصل عليه — {value} 🎮
+          </button>
+        </div>
+      ) : (
+        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white/[0.03] border border-white/10 text-white/40 text-[11px] font-display tracking-wider">
+          <Lock className="h-3 w-3" /> غير متاح
         </span>
-        <button
-          type="button"
-          onClick={() => onBuy(label, value)}
-          className="px-3 py-1.5 rounded-md bg-red-600 hover:bg-red-500 text-white text-[11px] font-display tracking-wider transition shadow-[0_0_12px_rgba(204,0,0,0.4)]"
-        >
-          احصل عليه — {value} 🎮
-        </button>
-      </div>
+      )}
     </div>
   );
 }
@@ -187,37 +161,24 @@ export function Offers() {
       type: g.name,
       duration: null,
       account,
-      platform:
-        g.platforms.length === 1 ? g.platforms[0] : g.platforms.join(" / "),
+      platform: g.platforms.length === 1 ? g.platforms[0] : g.platforms.join(" / "),
       price,
     });
     setOpenSlug(null);
   };
 
   return (
-    <section
-      id="offers"
-      className="relative py-24 px-4 sm:px-6 border-t border-white/5"
-    >
-      <div
-        className="absolute inset-0 -z-10 opacity-60"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, rgba(204,0,0,0.12), transparent 70%)",
-        }}
-      />
+    <section id="offers" className="relative py-24 px-4 sm:px-6 border-t border-white/5">
+      <div className="absolute inset-0 -z-10 opacity-60"
+        style={{ background: "radial-gradient(ellipse at center, rgba(204,0,0,0.12), transparent 70%)" }} />
 
       <div className="mx-auto max-w-6xl">
         <div className="text-center mb-12">
           <span className="inline-flex items-center gap-2 text-red-400 text-sm tracking-[0.3em] font-display">
             <Flame className="h-4 w-4" /> — عروض حصرية —
           </span>
-          <h2 className="section-heading text-chrome mt-2">
-            Summer Offers · عروض الصيف
-          </h2>
-          <p className="text-white/60 mt-3">
-            اضغط على أي لعبة لعرض الأسعار وزر الطلب
-          </p>
+          <h2 className="section-heading text-chrome mt-2">Summer Offers · عروض الصيف</h2>
+          <p className="text-white/60 mt-3">اضغط على أي لعبة لعرض الأسعار وزر الطلب</p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
@@ -242,10 +203,7 @@ export function Offers() {
 
                   <div className="absolute top-2 left-2 flex gap-1">
                     {g.platforms.map((p) => (
-                      <span
-                        key={p}
-                        className="text-[9px] font-display tracking-wider px-1.5 py-0.5 rounded bg-black/70 border border-white/20 text-white/90 backdrop-blur"
-                      >
+                      <span key={p} className="text-[9px] font-display tracking-wider px-1.5 py-0.5 rounded bg-black/70 border border-white/20 text-white/90 backdrop-blur">
                         {p}
                       </span>
                     ))}
@@ -270,95 +228,71 @@ export function Offers() {
         </p>
       </div>
 
-      {/* Price modal */}
       <AnimatePresence>
-        {openSlug &&
-          (() => {
-            const g = GAMES.find((x) => x.slug === openSlug)!;
-            return (
+        {openSlug && (() => {
+          const g = GAMES.find((x) => x.slug === openSlug)!;
+          return (
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+              onClick={() => setOpenSlug(null)}
+              dir="rtl"
+            >
               <motion.div
-                key="backdrop"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-                onClick={() => setOpenSlug(null)}
-                dir="rtl"
+                initial={{ opacity: 0, scale: 0.92, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-md rounded-2xl overflow-hidden border border-red-500/30 bg-[#0a0a0a] shadow-[0_0_60px_rgba(204,0,0,0.35)]"
               >
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.92, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                  transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
-                  onClick={(e) => e.stopPropagation()}
-                  className="relative w-full max-w-md rounded-2xl overflow-hidden border border-red-500/30 bg-[#0a0a0a] shadow-[0_0_60px_rgba(204,0,0,0.35)]"
+                <button
+                  onClick={() => setOpenSlug(null)}
+                  aria-label="إغلاق"
+                  className="absolute top-3 left-3 z-10 w-9 h-9 rounded-full bg-black/70 border border-white/15 flex items-center justify-center text-white/80 hover:text-white hover:border-red-500 transition"
                 >
-                  <button
-                    onClick={() => setOpenSlug(null)}
-                    aria-label="إغلاق"
-                    className="absolute top-3 left-3 z-10 w-9 h-9 rounded-full bg-black/70 border border-white/15 flex items-center justify-center text-white/80 hover:text-white hover:border-red-500 transition"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
+                  <X className="h-4 w-4" />
+                </button>
 
-                  <div className="relative aspect-square">
-                    <CoverArt game={g} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                    <div className="absolute bottom-0 inset-x-0 p-5">
-                      <div className="flex gap-1.5 mb-2">
-                        {g.platforms.map((p) => (
-                          <span
-                            key={p}
-                            className="text-[10px] font-display tracking-wider px-2 py-0.5 rounded bg-red-500/20 border border-red-500/40 text-red-200"
-                          >
-                            {p}
-                          </span>
-                        ))}
-                      </div>
-                      <h3 className="font-display text-2xl text-white leading-tight">
-                        {g.name}
-                      </h3>
+                <div className="relative aspect-square">
+                  <CoverArt game={g} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                  <div className="absolute bottom-0 inset-x-0 p-5">
+                    <div className="flex gap-1.5 mb-2">
+                      {g.platforms.map((p) => (
+                        <span key={p} className="text-[10px] font-display tracking-wider px-2 py-0.5 rounded bg-red-500/20 border border-red-500/40 text-red-200">
+                          {p}
+                        </span>
+                      ))}
                     </div>
+                    <h3 className="font-display text-2xl text-white leading-tight">{g.name}</h3>
                   </div>
+                </div>
 
-                  <div className="p-5">
-                    <div className="flex items-center gap-2 text-xs tracking-[0.3em] text-white/40 mb-3">
-                      <Gamepad2 className="h-3.5 w-3.5 text-red-400" /> اختر نوع
-                      الحساب والسعر
-                    </div>
-                    <div className="rounded-lg bg-white/[0.03] border border-white/10 px-4">
-                      <PriceBuyRow
-                        label="PRIM 5"
-                        value={g.prices.prim5}
-                        onBuy={(a, p) => startBuy(g, a, p)}
-                      />
-                      <PriceBuyRow
-                        label="PRIM 4"
-                        value={g.prices.prim4}
-                        onBuy={(a, p) => startBuy(g, a, p)}
-                      />
-                      <PriceBuyRow
-                        label="SEC"
-                        value={g.prices.sec}
-                        onBuy={(a, p) => startBuy(g, a, p)}
-                      />
-                    </div>
-                    <p className="text-[11px] text-white/40 text-center mt-3">
-                      اضغط على أي سعر لبدء عملية الدفع
-                    </p>
+                <div className="p-5">
+                  <div className="flex items-center gap-2 text-xs tracking-[0.3em] text-white/40 mb-3">
+                    <Gamepad2 className="h-3.5 w-3.5 text-red-400" /> اختر نوع الحساب والسعر
                   </div>
-                </motion.div>
+                  <div className="rounded-lg bg-white/[0.03] border border-white/10 px-4">
+                    <SlotRow label="PRIM 5" value={g.slots.prim5} onBuy={(a, p) => startBuy(g, a, p)} />
+                    <SlotRow label="PRIM 4" value={g.slots.prim4} onBuy={(a, p) => startBuy(g, a, p)} />
+                    <SlotRow label="SEC"    value={g.slots.sec}   onBuy={(a, p) => startBuy(g, a, p)} />
+                  </div>
+                  <p className="text-[11px] text-white/40 text-center mt-3">
+                    اضغط على أي سعر لبدء عملية الدفع · الخانات الرمادية غير متاحة لهذه اللعبة
+                  </p>
+                </div>
               </motion.div>
-            );
-          })()}
+            </motion.div>
+          );
+        })()}
       </AnimatePresence>
 
-      <PurchaseFlow
-        open={!!order}
-        onClose={() => setOrder(null)}
-        order={order}
-      />
+      <PurchaseFlow open={!!order} onClose={() => setOrder(null)} order={order} />
     </section>
   );
 }

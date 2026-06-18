@@ -53,21 +53,12 @@ const UPCOMING: Brand[] = [
 
 export function ComingSoon() {
   return (
-    <section
-      id="soon"
-      className="relative py-24 px-4 sm:px-6 border-t border-white/5"
-    >
+    <section id="soon" className="relative py-24 px-4 sm:px-6 border-t border-white/5">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-12">
-          <span className="text-red-400 text-sm tracking-[0.3em] font-display">
-            — توسعنا مستمر —
-          </span>
-          <h2 className="section-heading text-chrome mt-2">
-            المزيد قادم قريباً
-          </h2>
-          <p className="text-white/60 mt-3">
-            نحضّر باقة متكاملة من أفضل المنتجات الرقمية — ترقّبوا الإطلاق
-          </p>
+          <span className="text-red-400 text-sm tracking-[0.3em] font-display">— توسعنا مستمر —</span>
+          <h2 className="section-heading text-chrome mt-2">المزيد قادم قريباً</h2>
+          <p className="text-white/60 mt-3">نحضّر باقة متكاملة من أفضل المنتجات الرقمية — ترقّبوا الإطلاق</p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -99,9 +90,7 @@ export function ComingSoon() {
                       backgroundSize: "22px 22px",
                     }}
                   />
-                  <Icon
-                    className={`relative h-9 w-9 ${u.accent} drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]`}
-                  />
+                  <Icon className={`relative h-9 w-9 ${u.accent} drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]`} />
                   <span
                     className={`relative text-3xl sm:text-4xl text-white drop-shadow-[0_3px_14px_rgba(0,0,0,0.7)] ${u.font ?? "font-display"}`}
                   >
@@ -111,9 +100,7 @@ export function ComingSoon() {
                 </div>
 
                 <div className="p-4">
-                  <div className="font-display text-lg text-white/90 tracking-wider">
-                    {u.name}
-                  </div>
+                  <div className="font-display text-lg text-white/90 tracking-wider">{u.name}</div>
                   <div className="text-xs text-white/40 mt-1">{u.tagline}</div>
                   <div className="mt-3 h-1 w-full rounded-full bg-white/5 overflow-hidden">
                     <div className="h-full w-1/3 bg-gradient-to-r from-red-500 to-red-700 animate-pulse" />
@@ -126,10 +113,7 @@ export function ComingSoon() {
 
         <div className="text-center mt-10 text-sm text-white/50">
           هل تريد منتجاً معيناً؟{" "}
-          <a
-            href="#contact"
-            className="text-red-400 hover:text-red-300 underline underline-offset-4"
-          >
+          <a href="#contact" className="text-red-400 hover:text-red-300 underline underline-offset-4">
             راسلنا واطلبه
           </a>
         </div>

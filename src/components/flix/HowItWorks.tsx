@@ -2,21 +2,9 @@ import { motion } from "framer-motion";
 import { ShoppingBag, Wallet, Zap } from "lucide-react";
 
 const steps = [
-  {
-    icon: ShoppingBag,
-    title: "اختر منتجك ومدته",
-    desc: "تصفح المنتجات واختر النوع والمدة المناسبة",
-  },
-  {
-    icon: Wallet,
-    title: "ادفع بطريقتك المفضلة",
-    desc: "حول المبلغ على أحد طرق الدفع المتاحة وارفع إيصال التحويل",
-  },
-  {
-    icon: Zap,
-    title: "استقبل اشتراكك فوراً",
-    desc: "بعد تأكيد الدفع، يوصلك المنتج خلال دقائق قليلة",
-  },
+  { icon: ShoppingBag, title: "اختر منتجك ومدته", desc: "تصفح المنتجات واختر النوع والمدة المناسبة" },
+  { icon: Wallet, title: "ادفع بطريقتك المفضلة", desc: "حول المبلغ على أحد طرق الدفع المتاحة وارفع إيصال التحويل" },
+  { icon: Zap, title: "استقبل اشتراكك فوراً", desc: "بعد تأكيد الدفع، يوصلك المنتج خلال دقائق قليلة" },
 ];
 
 export function HowItWorks() {
@@ -24,9 +12,7 @@ export function HowItWorks() {
     <section id="how" className="relative py-24 px-4 sm:px-6 bg-[#060606]">
       <div className="mx-auto max-w-7xl">
         <div className="text-center mb-16">
-          <span className="text-red-400 text-sm tracking-[0.3em] font-display">
-            — كيف تطلب —
-          </span>
+          <span className="text-red-400 text-sm tracking-[0.3em] font-display">— كيف تطلب —</span>
           <h2 className="section-heading text-chrome mt-2">3 خطوات بسيطة</h2>
         </div>
 
@@ -49,9 +35,7 @@ export function HowItWorks() {
                   {i + 1}
                 </span>
               </div>
-              <h3 className="font-display text-2xl text-chrome mt-6 tracking-wide">
-                {s.title}
-              </h3>
+              <h3 className="font-display text-2xl text-chrome mt-6 tracking-wide">{s.title}</h3>
               <p className="text-white/60 mt-2 max-w-xs mx-auto">{s.desc}</p>
             </motion.div>
           ))}

@@ -1,9 +1,6 @@
 export function Embers({ count = 30 }: { count?: number }) {
   return (
-    <div
-      className="pointer-events-none absolute inset-0 overflow-hidden"
-      aria-hidden
-    >
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
       {Array.from({ length: count }).map((_, i) => {
         const left = Math.random() * 100;
         const delay = Math.random() * 10;
