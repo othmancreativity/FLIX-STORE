@@ -266,3 +266,18 @@
 }
 
 [dir="rtl"] body { font-family: "Tajawal", "Cairo", sans-serif; }
+
+/* ===== Game Search Bar ===== */
+.game-search-wrapper {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+}
+
+@media (max-width: 640px) {
+  .game-search-wrapper {
+    padding: 0 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+}
