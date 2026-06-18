@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html
+xmlns = "http://www.w3.org/1999/xhtml"
+xmlns:og = "http://opengraphprotocol.org/schema/"
+xmlns:fb = "http://www.facebook.com/2008/fbml"
+>
+<head>
+<meta charset="utf-8" />
+<title>Capcom USA > Home</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta property="og:site_name" content="Capcom USA">
+	<meta property="og:url" content="https://news.capcomusa.com/">
+	<meta property="og:title" content="Capcom USA">
+	<meta property="og:image" content="https://cdn.capcom-unity.com/capcom-unity.com/user/capcom_games_discussion/profile.jpg">
+	<meta property="og:description" content="Capcom USA Homepage">
+	<meta property="og:type" content="website">
+	<meta name="twitter:site" content="@capcomusa_">
+	<meta name="twitter:url" content="https://wwws.capcomusa.com/">
+	<meta name="twitter:title" content="Capcom USA">
+	<meta name="twitter:description" content="Capcom USA Homepage">
+	<meta name="twitter:image" content="https://cdn.capcom-unity.com/capcom-unity.com/user/capcom_games_discussion/profile.jpg">
+	<meta name="twitter:type" content="website">
+
+  <link rel="icon" type="image/x-icon" href="/favicon64.png">
+  <link rel='stylesheet' type='text/css' href='//static.capcom.com/navbar/newbar.css' />
+  <link rel='stylesheet' type='text/css' href='/css/materialdesignicons.min.css' />
+  <link rel="stylesheet" type='text/css' href="/css/roboto.css" />
+  <link rel="stylesheet" type='text/css' href="/css/bootstrap.min.css" />
+  <link rel="stylesheet" type='text/css' href="/css/mdb-pro.min.css">
+  <link rel="stylesheet" type='text/css' href="/css/mdb.ecommerce.min.css">
+  <link rel="stylesheet" type='text/css' href="/css/slick-theme.css">
+  <link rel="stylesheet" type='text/css' href="/css/slick.css">
+  <link rel='stylesheet' type='text/css' href='/css/style.css' />
+
+  <script src="//static.capcom.com/navbar/newbar.js" type="text/javascript"></script>
+  <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/mdb.min.js"></script>
+  <script src="//static.capcom.com/unity/gdpr/gdpr.js" type="text/javascript"></script>
+
+<style>
+.preloader {
+  align-items: center;
+  background: rgb(23, 22, 22);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: opacity 0.3s linear;
+  width: 100%;
+  z-index: 9999;
+}
+</style>
+</head>
+<body class="capcom_us_home mod-lt">
+
+<div class="preloader">
+  <img src="/images/load_logo.png" alt="spinner">
+</div>
+
+<div class="wrapper">
+
+        <div id="hero"></div>
+
+	<section class="games_list">
+            <div class="games_header">
+                <h3 class="games_section_header mod-lt">Games</h3>
+
+                <div class="franchise_pulldown_wrap">
+                  <div class="select-outline">
+                    <select id="franchise_select" class="mdb-select md-outline md-form" searchable="Search here..">
+                      <option value="" disabled selected>All</option>
+                      <option value="Ace Attorney">Ace Attorney</option>
+                      <option value="Bionic Commando">Bionic Commando</option>
+                      <option value="Dead Rising">Dead Rising</option>
+                      <option value="Devil May Cry">Devil May Cry</option>
+                      <option value="Dragon's Dogma">Dragon's Dogma</option>
+                      <option value="Ghosts 'n Goblins">Ghosts 'n Goblins</option>
+                      <option value="Lost Planet">Lost Planet</option>
+                      <option value="Mega Man">Mega Man</option>
+                      <option value="Monster Hunter">Monster Hunter</option>
+                      <option value="Okami">Okami</option>
+                      <option value="Onimusha">Onimusha</option>
+                      <option value="Other">Other</option>
+                      <option value="Resident Evil">Resident Evil</option>
+                      <option value="Street Fighter">Street Fighter</option>
+                      <option value="Versus">Versus</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="games_paginator">
+                        <i id="gp_prev" class="prodspecial gp_disabled"></i><i id="gp_next" class="prodspecial"></i>
+                </div>
+           </div>
+           <div id="games"></div>
+	</section>
+
+        <h3 class="news_section_header mod-lt">Latest News</h3>
+        <section class="news_section"></section>
+                <div class="all_news_link">
+                   <a href="https://www.capcom-unity.com/" target="_blank" class="special">More News</a>
+                </div>
+
+	<!-- Social Destinations //-->
+	<section class="connect-bar">
+		<ul>
+                        <li><a href="https://www.x.com/capcomusa_" id="social_twitter" target="_blank">
+                        	<svg width="20" height="20" viewBox="0 0 24 24" ><path d="m13.903 10.77 7.445-8.47h-1.764L13.12 9.653 7.954 2.3H2l7.808 11.12L2 22.3h1.764l6.828-7.765 5.452 7.765H22l-8.098-11.53zm-2.417 2.747-.79-1.107L4.4 3.6h2.71l5.08 7.11.79 1.107 6.605 9.242h-2.71l-5.39-7.542z"></path></svg>
+                        </a></li>
+                        <li><a href="https://www.instagram.com/capcomusa/" id="social_instagram" target="_blank">
+                        	<svg width="22" height="22" viewBox="0 0 24 24" ><path d="M20.134 16.036c-.044.975-.207 1.504-.344 1.856-.182.467-.398.8-.748 1.15s-.683.566-1.15.748c-.352.136-.88.3-1.856.344-1.054.048-1.37.058-4.04.058s-2.985-.01-4.04-.058c-.974-.045-1.503-.208-1.855-.344a3.1 3.1 0 0 1-1.15-.748 3.1 3.1 0 0 1-.746-1.15c-.137-.352-.3-.88-.345-1.856-.05-1.054-.06-1.37-.06-4.04s.01-2.985.06-4.04c.044-.974.207-1.503.344-1.855.18-.466.398-.8.747-1.15a3.1 3.1 0 0 1 1.15-.747c.353-.137.882-.3 1.857-.344 1.054-.05 1.37-.06 4.04-.06s2.985.01 4.04.06c.974.044 1.503.206 1.856.343.466.182.8.398 1.15.748s.565.684.747 1.15c.137.353.3.882.344 1.857.048 1.054.058 1.37.058 4.04s-.01 2.985-.058 4.04m1.8-8.162c-.05-1.064-.218-1.79-.465-2.427a4.9 4.9 0 0 0-1.154-1.77 4.9 4.9 0 0 0-1.77-1.154c-.637-.247-1.364-.416-2.428-.464-1.066-.05-1.406-.06-4.12-.06-2.716 0-3.057.01-4.123.06-1.064.048-1.79.217-2.427.464a4.9 4.9 0 0 0-1.77 1.153 4.9 4.9 0 0 0-1.153 1.77c-.248.637-.416 1.364-.465 2.428S2 9.28 2 11.995c0 2.716.01 3.057.06 4.123.05 1.064.217 1.79.465 2.427a4.9 4.9 0 0 0 1.153 1.77 4.9 4.9 0 0 0 1.77 1.153c.636.248 1.363.417 2.427.465 1.066.05 1.407.06 4.122.06s3.055-.01 4.12-.06c1.065-.048 1.792-.217 2.428-.465a4.9 4.9 0 0 0 1.77-1.153 4.9 4.9 0 0 0 1.154-1.77c.246-.636.415-1.363.463-2.427.05-1.066.06-1.407.06-4.122s-.01-3.055-.06-4.12m-9.936-1.013a5.135 5.135 0 1 1-.002 10.27 5.135 5.135 0 0 1 .002-10.27m0 1.8a3.332 3.332 0 1 0 0 6.666 3.332 3.332 0 0 0 0-6.666m5.336-3.203a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4"></path></svg>
+			</a></li>
+                        <li><a href="https://bsky.app/profile/capcomusa.com" id="social_bluesky" target="_blank">
+				<svg fill="#000000" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M12 10.8c-1.087 -2.114 -4.046 -6.053 -6.798 -7.995C2.566 0.944 1.561 1.266 0.902 1.565 0.139 1.908 0 3.08 0 3.768c0 0.69 0.378 5.65 0.624 6.479 0.815 2.736 3.713 3.66 6.383 3.364 0.136 -0.02 0.275 -0.039 0.415 -0.056 -0.138 0.022 -0.276 0.04 -0.415 0.056 -3.912 0.58 -7.387 2.005 -2.83 7.078 5.013 5.19 6.87 -1.113 7.823 -4.308 0.953 3.195 2.05 9.271 7.733 4.308 4.267 -4.308 1.172 -6.498 -2.74 -7.078a8.741 8.741 0 0 1 -0.415 -0.056c0.14 0.017 0.279 0.036 0.415 0.056 2.67 0.297 5.568 -0.628 6.383 -3.364 0.246 -0.828 0.624 -5.79 0.624 -6.478 0 -0.69 -0.139 -1.861 -0.902 -2.206 -0.659 -0.298 -1.664 -0.62 -4.3 1.24C16.046 4.748 13.087 8.687 12 10.8Z" stroke-width="1"></path></svg>
+                        </a></li>
+                        <li><a href="https://www.youtube.com/CapcomUSA" id="social_youtube" target="_blank">
+                        	<svg width="20" height="20" viewBox="0 0 24 24" ><path d="m9.73 15.117-.002-6.18 5.944 3.1zm13.05-7.252s-.215-1.516-.875-2.184c-.836-.875-1.775-.88-2.203-.93-3.08-.223-7.697-.223-7.697-.223h-.01s-4.618 0-7.696.222c-.43.05-1.37.055-2.206.93-.66.67-.874 2.185-.874 2.185S1 9.645 1 11.425v1.67c0 1.78.22 3.56.22 3.56s.215 1.516.874 2.184c.837.875 1.937.847 2.426.94C6.28 19.947 12 20 12 20s4.623-.007 7.702-.23c.43-.05 1.367-.055 2.204-.93.66-.67.875-2.185.875-2.185s.22-1.78.22-3.56v-1.67c0-1.78-.22-3.56-.22-3.56z"></path></svg>
+                        </a></li>
+                        <li><a href="https://twitch.tv/capcomusa" id="social_twitch" target="_blank">
+                        	<svg width="24" height="24" viewBox="0 0 24 24" ><path d="M2.149 0l-1.612 4.119v16.836h5.731v3.045h3.224l3.045-3.045h4.657l6.269-6.269v-14.686h-21.314zm19.164 13.612l-3.582 3.582h-5.731l-3.045 3.045v-3.045h-4.836v-15.045h17.194v11.463zm-3.582-7.343v6.262h-2.149v-6.262h2.149zm-5.731 0v6.262h-2.149v-6.262h2.149z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
+                        </a></li>
+                        <li><a href="https://www.tiktok.com/@capcom" id="social_tiktok" target="_blank">
+                        	<svg fill="#000000" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>tiktok</title> <path d="M16.656 1.029c1.637-0.025 3.262-0.012 4.886-0.025 0.054 2.031 0.878 3.859 2.189 5.213l-0.002-0.002c1.411 1.271 3.247 2.095 5.271 2.235l0.028 0.002v5.036c-1.912-0.048-3.71-0.489-5.331-1.247l0.082 0.034c-0.784-0.377-1.447-0.764-2.077-1.196l0.052 0.034c-0.012 3.649 0.012 7.298-0.025 10.934-0.103 1.853-0.719 3.543-1.707 4.954l0.020-0.031c-1.652 2.366-4.328 3.919-7.371 4.011l-0.014 0c-0.123 0.006-0.268 0.009-0.414 0.009-1.73 0-3.347-0.482-4.725-1.319l0.040 0.023c-2.508-1.509-4.238-4.091-4.558-7.094l-0.004-0.041c-0.025-0.625-0.037-1.25-0.012-1.862 0.49-4.779 4.494-8.476 9.361-8.476 0.547 0 1.083 0.047 1.604 0.136l-0.056-0.008c0.025 1.849-0.050 3.699-0.050 5.548-0.423-0.153-0.911-0.242-1.42-0.242-1.868 0-3.457 1.194-4.045 2.861l-0.009 0.030c-0.133 0.427-0.21 0.918-0.21 1.426 0 0.206 0.013 0.41 0.037 0.61l-0.002-0.024c0.332 2.046 2.086 3.59 4.201 3.59 0.061 0 0.121-0.001 0.181-0.004l-0.009 0c1.463-0.044 2.733-0.831 3.451-1.994l0.010-0.018c0.267-0.372 0.45-0.822 0.511-1.311l0.001-0.014c0.125-2.237 0.075-4.461 0.087-6.698 0.012-5.036-0.012-10.060 0.025-15.083z"></path> </g></svg>
+                        </a></li>
+                        <li><a href="https://www.facebook.com/capcomusa" id="social_facebook" target="_blank">
+                        	<svg width="20" height="20" viewBox="0 0 32 32" ><path d="M12.752 30.4V16.888H9.365V12.02h3.387V7.865c0-3.264 2.002-6.264 6.613-6.264 1.866 0 3.248.19 3.248.19l-.11 4.54s-1.404-.013-2.943-.013c-1.66 0-1.93.81-1.93 2.152v3.553h5.008l-.22 4.867h-4.786V30.4z"></path></svg>
+                        </a></li>
+                        <!--li><a href="https://discord.com/invite/capcom" id="social_discord" target="_blank">
+                       		<svg width="24" height="24" viewBox="0 0 24 24" fill-rule="evenodd" clip-rule="evenodd"><path d="M19.54 0c1.356 0 2.46 1.104 2.46 2.472v21.528l-2.58-2.28-1.452-1.344-1.536-1.428.636 2.22h-13.608c-1.356 0-2.46-1.104-2.46-2.472v-16.224c0-1.368 1.104-2.472 2.46-2.472h16.08zm-4.632 15.672c2.652-.084 3.672-1.824 3.672-1.824 0-3.864-1.728-6.996-1.728-6.996-1.728-1.296-3.372-1.26-3.372-1.26l-.168.192c2.04.624 2.988 1.524 2.988 1.524-1.248-.684-2.472-1.02-3.612-1.152-.864-.096-1.692-.072-2.424.024l-.204.024c-.42.036-1.44.192-2.724.756-.444.204-.708.348-.708.348s.996-.948 3.156-1.572l-.12-.144s-1.644-.036-3.372 1.26c0 0-1.728 3.132-1.728 6.996 0 0 1.008 1.74 3.66 1.824 0 0 .444-.54.804-.996-1.524-.456-2.1-1.416-2.1-1.416l.336.204.048.036.047.027.014.006.047.027c.3.168.6.3.876.408.492.192 1.08.384 1.764.516.9.168 1.956.228 3.108.012.564-.096 1.14-.264 1.74-.516.42-.156.888-.384 1.38-.708 0 0-.6.984-2.172 1.428.36.456.792.972.792.972zm-5.58-5.604c-.684 0-1.224.6-1.224 1.332 0 .732.552 1.332 1.224 1.332.684 0 1.224-.6 1.224-1.332.012-.732-.54-1.332-1.224-1.332zm4.38 0c-.684 0-1.224.6-1.224 1.332 0 .732.552 1.332 1.224 1.332.684 0 1.224-.6 1.224-1.332 0-.732-.54-1.332-1.224-1.332z"/></svg>
+                	</a></li //-->
+                </ul>
+	</section>
+
+	<!-- Ad Unit //-->
+	<section class="ad-unit"></section>
+
+</div>
+
+   <!--  FOOTER START //-->
+
+   <footer class="mod-lt">
+	<div id="footer-navi" class="page_container mod-lt">
+		<div class="inner clearfix">
+			<ul class="navi-list">
+				<li class="navi-col">
+					<p class="ttl">Offices</p>
+					<ul>
+						<li><a href="https://www.capcom.co.jp">Capcom Japan</a></li>
+						<li><a href="https://www.capcomusa.com">Capcom USA</a></li>
+						<li><a href="https://www.capcom-europe.com">Capcom Europe</a></li>
+						<li><a href="https://www.capcom-games.com/en-asia/">Capcom Asia</a></li>
+                                                <li><a href="https://www.capcom.com.tw">Capcom Taiwan</a></li>
+					</ul>
+				</li>
+				<li class="navi-col">
+					<p class="ttl">Online Store</p>
+					<ul>
+						<li><a href="https://www.e-capcom.com/" target="">ショッピング：イーカプコン</a></li>
+						<li><a href="https://games.capcomusa.com">North America</a></li>
+                                                <li><a href="https://store.capcom-europe.com/">Europe</a></li>
+					</ul>
+					<p class="ttl">Mobile</p>
+					<ul>
+						<li><a href="https://www.capcom-games.com/product/ja-jp/?result&sort=latest&platform=ios,android">スマートフォンアプリ</a></li>
+						<li><a href="https://www.us.capcommobile.com/">Capcom Mobile</a></li>
+					</ul>
+				</li>
+				<li class="navi-col">
+					<p class="ttl">Capcom IR</p>
+					<ul>
+						<li><a href="https://www.capcom.co.jp/ir/index.html">企業・投資家情報</a></li>
+						<li><a href="https://www.capcom.co.jp/ir/english/index.html">Investor Relations</a></li>
+					</ul>
+					<p class="ttl">Careers</p>
+					<ul>
+						<li><a href="https://www.capcom.co.jp/recruit/">採用情報</a></li>
+						<li><a href="https://jobs.jobvite.com/capcomusa">Capcom USA</a></li>
+					</ul>
+				</li>
+				<li class="navi-col">
+					<p class="ttl">Capcom News | <a href="https://rss.capcom-unity.com/blog/rss">RSS</a></p>
+					<ul>
+						<li><a href="https://news.capcomusa.com/">USA</a>
+						<li><a href="http://news.capcomusa.com/#pt-BR" target="">Brazil</a></li>
+                                                <li><a href="http://news.capcomusa.com/#es-ES" target="">LATAM</a></li>
+					</ul>
+					<p class="ttl">Support</p>
+					<ul>
+						<li><a href="https://www.capcom.co.jp/support/index.html">サポート情報</a></li>
+						<li><a href="https://capcomusa.com/support">Capcom USA</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="inner clearfix" style="font-family: Helvetica; font-size: 10px;text-align: center;">
+		&copy;CAPCOM U.S.A., INC. ALL RIGHTS RESERVED. | <a href="https://www.capcomusa.com/terms/">TERMS</a> | <a href="https://www.capcomusa.com/privacy/">PRIVACY POLICY</a> | <a href="https://www.capcomusa.com/video-policy/">VIDEO POLICY</a> | <a href="https://www.capcomusa.com/privacy/#cookies">COOKIE POLICY</a> | <a href="https://www.capcom-games.com/en/fan-content-guidelines/">FAN CONTENT GUIDELINES</a>
+                <br/><br/>
+                <script language="JavaScript1.1" src="//cdn.capcom-unity.com/esrb_privacy.js"></script>
+	</div>
+    </footer>
+
+<script type="text/javascript" src="js/site.js"></script>
+<script type="text/javascript" src="js/adunit.js"></script>
+
+</body>
+</html>
