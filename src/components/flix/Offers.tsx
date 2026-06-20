@@ -19,7 +19,17 @@ type Game = {
  * is not available for that game (rendered disabled/grayed in the UI).
  */
 const GAMES: Game[] = [
-  // قائمة الألعاب فاضية حاليًا — أضف عناصر جديدة هنا بنفس الشكل (slug, name, platforms, slots, accent)
+  { slug: "gta5", name: "Grand Theft Auto V", platforms: ["PS4", "PS5"], slots: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-rose-700 via-red-900 to-black" },
+  { slug: "fc26", name: "EA Sports FC 26", platforms: ["PS4", "PS5"], slots: { prim5: 600, prim4: 350, sec: 300 }, accent: "from-emerald-600 via-emerald-900 to-black" },
+  { slug: "bf6", name: "Battlefield 6", platforms: ["PS5"], slots: { prim5: 1350, prim4: null, sec: 950 }, accent: "from-orange-600 via-amber-900 to-black" },
+  { slug: "007", name: "007: First Light", platforms: ["PS5"], slots: { prim5: 1600, prim4: null, sec: 1200 }, accent: "from-yellow-600 via-zinc-800 to-black" },
+  { slug: "yotei", name: "Ghost of Yōtei", platforms: ["PS5"], slots: { prim5: 1500, prim4: null, sec: 1000 }, accent: "from-red-600 via-rose-900 to-black" },
+  { slug: "rdr2", name: "Red Dead Redemption II", platforms: ["PS4", "PS5"], slots: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-amber-700 via-orange-950 to-black" },
+  { slug: "wwe26", name: "WWE 2K26", platforms: ["PS5"], slots: { prim5: 1600, prim4: null, sec: 1200 }, accent: "from-red-700 via-red-950 to-black" },
+  { slug: "minecraft", name: "Minecraft", platforms: ["PS4", "PS5"], slots: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-lime-600 via-emerald-900 to-black" },
+  { slug: "re-requiem", name: "Resident Evil: Requiem", platforms: ["PS5"], slots: { prim5: 1450, prim4: null, sec: 1000 }, accent: "from-red-800 via-zinc-900 to-black" },
+  { slug: "wolverine", name: "Marvel's Wolverine", platforms: ["PS5"], slots: { prim5: 1600, prim4: null, sec: 1200 }, accent: "from-yellow-600 via-amber-900 to-black" },
+  { slug: "g-acshadows", name: "Assassin's Creed Shadows", platforms: ["PS5"], slots: { prim5: 1050, prim4: null, sec: 700 }, accent: "from-slate-700 via-stone-900 to-black" },
 ];
 
 // Posters live in src/assets/games/<slug>.{jpg,png,webp}. Missing files
