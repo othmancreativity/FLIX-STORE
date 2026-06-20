@@ -35,7 +35,6 @@ const GAMES: Game[] = [
   { slug: "g-re2",         name: "Resident Evil 2",                    platforms: ["PS4"],        slots: { prim5: null, prim4: 350,  sec: 350  }, accent: "from-red-800 via-zinc-900 to-black" },
   { slug: "g-re3",         name: "Resident Evil 3",                    platforms: ["PS4"],        slots: { prim5: null, prim4: 350,  sec: 350  }, accent: "from-red-800 via-zinc-900 to-black" },
   { slug: "g-re4remake",   name: "Resident Evil 4 Remake (Arabic)",    platforms: ["PS5"],        slots: { prim5: 500,  prim4: null, sec: 500  }, accent: "from-red-800 via-zinc-900 to-black" },
-  { slug: "re-requiem",    name: "Resident Evil: Requiem",             platforms: ["PS5"],        slots: { prim5: 1500, prim4: null, sec: 1500 }, accent: "from-red-800 via-zinc-900 to-black" },
 
   // —— Call of Duty: Black Ops (3 & 4 — grouped together) ——
   { slug: "g-bo3",         name: "Call of Duty: Black Ops 3",          platforms: ["PS4", "PS5"], slots: { prim5: 750,  prim4: 750,  sec: 750  }, accent: "from-orange-700 via-stone-950 to-black" },
@@ -57,18 +56,10 @@ const GAMES: Game[] = [
   { slug: "g-arkascend",   name: "ARK: Survival Ascended",             platforms: ["PS4", "PS5"], slots: { prim5: null, prim4: null, sec: 1100 }, accent: "from-lime-700 via-emerald-950 to-black" },
 
   // —— Grand Theft Auto (V + VI — grouped together) ——
-  { slug: "gta5",          name: "Grand Theft Auto V",                 platforms: ["PS4", "PS5"], slots: { prim5: 500,  prim4: 350,  sec: 300  }, accent: "from-rose-700 via-red-900 to-black" },
   { slug: "g-gta6",        name: "Grand Theft Auto VI",                platforms: ["PS5"],        slots: { prim5: 2650, prim4: null, sec: 2650 }, accent: "from-pink-600 via-rose-900 to-black" },
 
   // —— Remaining single titles ——
-  { slug: "bf6",           name: "Battlefield 6",                      platforms: ["PS5"],        slots: { prim5: 1350, prim4: null, sec: 950  }, accent: "from-orange-600 via-amber-900 to-black" },
-  { slug: "yotei",         name: "Ghost of Yōtei",                     platforms: ["PS5"],        slots: { prim5: 1500, prim4: null, sec: 1000 }, accent: "from-red-600 via-rose-900 to-black" },
-  { slug: "rdr2",          name: "Red Dead Redemption II",             platforms: ["PS4", "PS5"], slots: { prim5: 500,  prim4: 350,  sec: 300  }, accent: "from-amber-700 via-orange-950 to-black" },
-  { slug: "wolverine",     name: "Marvel's Wolverine",                 platforms: ["PS5"],        slots: { prim5: 2000, prim4: null, sec: 2000 }, accent: "from-yellow-600 via-amber-900 to-black" },
-  { slug: "fc26",          name: "FC 26",                              platforms: ["PS4"],        slots: { prim5: null, prim4: 500,  sec: 500  }, accent: "from-emerald-600 via-emerald-900 to-black" },
-  { slug: "007",           name: "007: First Light",                   platforms: ["PS4", "PS5"], slots: { prim5: 1900, prim4: 1900, sec: 1900 }, accent: "from-yellow-600 via-zinc-800 to-black" },
   { slug: "g-forza6",      name: "Forza Horizon",                      platforms: ["PS5"],        slots: { prim5: 2200, prim4: null, sec: 2200 }, accent: "from-blue-600 via-indigo-900 to-black" },
-  { slug: "wwe26",         name: "WWE 2K26",                           platforms: ["PS5"],        slots: { prim5: 1500, prim4: null, sec: null }, accent: "from-red-700 via-red-950 to-black" },
   { slug: "g-ghostrecon",  name: "Ghost Recon",                        platforms: ["PS4"],        slots: { prim5: null, prim4: 200,  sec: 200  }, accent: "from-stone-600 via-stone-900 to-black" },
   { slug: "g-amongus",     name: "Among Us",                           platforms: ["PS5"],        slots: { prim5: 130,  prim4: null, sec: 130  }, accent: "from-rose-500 via-rose-900 to-black" },
   { slug: "g-tombraider",  name: "Tomb Raider Trilogy",                platforms: ["PS4"],        slots: { prim5: null, prim4: 200,  sec: 200  }, accent: "from-orange-700 via-stone-900 to-black" },
@@ -80,7 +71,6 @@ const GAMES: Game[] = [
   { slug: "g-acvalhalla",  name: "Assassin's Creed Valhalla",          platforms: ["PS4", "PS5"], slots: { prim5: null, prim4: null, sec: 300  }, accent: "from-slate-700 via-stone-900 to-black" },
   { slug: "g-mk1",         name: "Mortal Kombat 1",                    platforms: ["PS5"],        slots: { prim5: 800,  prim4: null, sec: 800  }, accent: "from-red-700 via-zinc-950 to-black" },
   { slug: "g-tekken7",     name: "Tekken 7",                           platforms: ["PS4", "PS5"], slots: { prim5: 350,  prim4: 350,  sec: 350  }, accent: "from-purple-700 via-zinc-950 to-black" },
-  { slug: "minecraft",     name: "Minecraft",                          platforms: ["PS4", "PS5"], slots: { prim5: 600,  prim4: 600,  sec: 600  }, accent: "from-lime-600 via-emerald-900 to-black" },
   { slug: "g-gowragnarok", name: "God of War Ragnarök",                platforms: ["PS4", "PS5"], slots: { prim5: 800,  prim4: 800,  sec: 800  }, accent: "from-sky-700 via-slate-950 to-black" },
 
   // —— 10 additional games (to reach 50 total) ——
@@ -94,6 +84,20 @@ const GAMES: Game[] = [
   { slug: "g-godofwar",    name: "God of War (2018)",                  platforms: ["PS4", "PS5"], slots: { prim5: 350,  prim4: 350,  sec: 350  }, accent: "from-sky-700 via-slate-950 to-black" },
   { slug: "g-stray",       name: "Stray",                              platforms: ["PS4", "PS5"], slots: { prim5: 300,  prim4: 300,  sec: 300  }, accent: "from-purple-700 via-zinc-950 to-black" },
   { slug: "g-itTakesTwo",  name: "It Takes Two",                       platforms: ["PS4", "PS5"], slots: { prim5: 300,  prim4: 300,  sec: 300  }, accent: "from-pink-600 via-rose-900 to-black" },
+
+  // —— Synced via update_flix_store.py (client-requested catalog) ——
+  { slug: "gta5", name: "Grand Theft Auto V", platforms: ["PS4", "PS5"], slots: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-rose-700 via-red-900 to-black" },
+  { slug: "fc26", name: "EA Sports FC 26", platforms: ["PS4", "PS5"], slots: { prim5: 600, prim4: 350, sec: 300 }, accent: "from-emerald-600 via-emerald-900 to-black" },
+  { slug: "bf6", name: "Battlefield 6", platforms: ["PS5"], slots: { prim5: 1350, prim4: null, sec: 950 }, accent: "from-orange-600 via-amber-900 to-black" },
+  { slug: "007", name: "007: First Light", platforms: ["PS5"], slots: { prim5: 1600, prim4: null, sec: 1200 }, accent: "from-yellow-600 via-zinc-800 to-black" },
+  { slug: "yotei", name: "Ghost of Yōtei", platforms: ["PS5"], slots: { prim5: 1500, prim4: null, sec: 1000 }, accent: "from-red-600 via-rose-900 to-black" },
+  { slug: "rdr2", name: "Red Dead Redemption II", platforms: ["PS4", "PS5"], slots: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-amber-700 via-orange-950 to-black" },
+  { slug: "wwe26", name: "WWE 2K26", platforms: ["PS5"], slots: { prim5: 1600, prim4: null, sec: 1200 }, accent: "from-red-700 via-red-950 to-black" },
+  { slug: "minecraft", name: "Minecraft", platforms: ["PS4", "PS5"], slots: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-lime-600 via-emerald-900 to-black" },
+  { slug: "re-requiem", name: "Resident Evil: Requiem", platforms: ["PS5"], slots: { prim5: 1450, prim4: null, sec: 1000 }, accent: "from-red-800 via-zinc-900 to-black" },
+  { slug: "wolverine", name: "Marvel's Wolverine", platforms: ["PS5"], slots: { prim5: 1600, prim4: null, sec: 1200 }, accent: "from-yellow-600 via-amber-900 to-black" },
+  { slug: "g-acshadows", name: "Assassin's Creed Shadows", platforms: ["PS5"], slots: { prim5: 1050, prim4: null, sec: 700 }, accent: "from-slate-700 via-stone-900 to-black" },
+
 ];
 
 // Posters live in src/assets/games/<slug>.{jpg,png,webp}. Missing files
