@@ -20,7 +20,7 @@ type Game = {
  */
 const GAMES: Game[] = [
   { slug: "gta5", name: "Grand Theft Auto V", platforms: ["PS4", "PS5"], slots: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-rose-700 via-red-900 to-black" },
-  { slug: "fc26", name: "EA Sports FC 26", platforms: ["PS4", "PS5"], slots: { prim5: 600, prim4: 350, sec: 300 }, accent: "from-emerald-600 via-emerald-900 to-black" },
+  { slug: "fc26", name: "EA Sports FC 26", platforms: ["PS4", "PS5"], slots: { prim5: 500, prim4: 350, sec: 300 }, accent: "from-emerald-600 via-emerald-900 to-black" },
   { slug: "bf6", name: "Battlefield 6", platforms: ["PS5"], slots: { prim5: 1350, prim4: null, sec: 950 }, accent: "from-orange-600 via-amber-900 to-black" },
   { slug: "007", name: "007: First Light", platforms: ["PS5"], slots: { prim5: 1600, prim4: null, sec: 1200 }, accent: "from-yellow-600 via-zinc-800 to-black" },
   { slug: "yotei", name: "Ghost of Yōtei", platforms: ["PS5"], slots: { prim5: 1500, prim4: null, sec: 1000 }, accent: "from-red-600 via-rose-900 to-black" },
